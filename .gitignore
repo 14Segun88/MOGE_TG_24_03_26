@@ -1,0 +1,43 @@
+# ── Python ────────────────────────────────────
+.env
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.venv/
+
+# ── Логи и runtime-данные ─────────────────────
+*.log
+bot.out
+hitl_database.db
+crawler.log
+
+# ── Сгенерированные отчёты ────────────────────
+ResyltatTesta/
+reports/
+logs/
+
+# ── Тяжёлые файлы и архивы ────────────────────
+xsd/*.zip
+*.zip
+real_docs/
+Test/
+
+# ── Большие сгенерированные файлы ─────────────
+_parsed_docs.txt
+bot.out
+sverka_ot_vladimira
+
+# ── Системные файлы ──────────────────────────
+.DS_Store
+Thumbs.db
+*:Zone.Identifier
+
+# ── IDE ──────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ── Gemini (агент) ───────────────────────────
+.gemini/

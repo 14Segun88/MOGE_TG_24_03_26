@@ -1,0 +1,4 @@
+# Зависимости для тестового запуска (tests/run_test.py)
+# Включает всё из основного requirements.txt плюс openpyxl для Excel-экспорта отчётов
+-r requirements.txt
+openpyxl>=3.1.2

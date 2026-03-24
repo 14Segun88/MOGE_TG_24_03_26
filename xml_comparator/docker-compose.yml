@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  xml-comparator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: xml-comparator:latest
+    container_name: xml-comparator
+    restart: unless-stopped
+
+    ports:
+      - "8000:8000"
+
+    environment:
+      HOST: "0.0.0.0"
+      PORT: "8000"
+      RELOAD: "false"
+      LOG_LEVEL: "info"
+      # Путь к маппингу внутри контейнера.
+      # Если хотите использовать внешний файл — раскомментируйте volumes ниже
+      # и укажите путь к смонтированному файлу.
+      MAPPING_FILE_PATH: "/app/mapping_PZ_ZnP.json"
+      # Папка для JSON-отчётов внутри контейнера.
+      # Чтобы отчёты сохранялись на хосте — раскомментируйте volumes ниже.
+      # Чтобы отключить сохранение совсем — оставьте REPORTS_DIR пустым: REPORTS_DIR: ""
+      REPORTS_DIR: "/app/reports"
+      MAX_XML_SIZE_BYTES: "52428800"    # 50 МБ
+      MAX_MAPPING_SIZE_BYTES: "10485760" # 10 МБ
+
+    volumes:
+      # Сохранение отчётов на хост-машину: каждый запрос → reports/<uuid>/report.json
+      - ./reports:/app/reports
+      # Необязательно: внешний файл маппинга вместо встроенного
+      # - ./mapping_PZ_ZnP.json:/app/mapping_PZ_ZnP.json:ro
+
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/v1/health')"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3

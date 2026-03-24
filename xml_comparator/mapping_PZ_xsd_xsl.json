@@ -1,0 +1,2060 @@
+{
+  "mapping_rows": [
+    {
+      "section": "Реквизиты ПЗ",
+      "subsection": "Шифр",
+      "label": "Шифр пояснительной записки",
+      "xpath_xsd": "/ExplanatoryNote/ExplanatoryNoteNumber",
+      "xpath_xsl_anchor": "ExplanatoryNoteYear",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Реквизиты ПЗ",
+      "subsection": "Год",
+      "label": "Год составления пояснительной записки",
+      "xpath_xsd": "/ExplanatoryNote/ExplanatoryNoteYear",
+      "xpath_xsl_anchor": "ExplanatoryNoteYear",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Реквизиты ПЗ",
+      "subsection": "Версия схемы",
+      "label": "Версия схемы XML (фиксировано 01.06)",
+      "xpath_xsd": "/ExplanatoryNote/@SchemaVersion",
+      "xpath_xsl_anchor": "",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Реквизиты ПЗ",
+      "subsection": "Гриф доступа",
+      "label": "Гриф ограничения доступа к документу",
+      "xpath_xsd": "/ExplanatoryNote/@AccessRestriction",
+      "xpath_xsl_anchor": "",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Реквизиты ПЗ",
+      "subsection": "Ссылка на схему",
+      "label": "Ссылка на XSD-схему (@SchemaLink)",
+      "xpath_xsd": "/ExplanatoryNote/@SchemaLink",
+      "xpath_xsl_anchor": "",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Реквизиты ПЗ",
+      "subsection": "GUID документа",
+      "label": "Идентификатор документа для XMLDsig (@id)",
+      "xpath_xsd": "/ExplanatoryNote/@id",
+      "xpath_xsl_anchor": "",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Изменения в ПД",
+      "subsection": "Блок изменений",
+      "label": "Сведения о внесении изменений в проектную документацию",
+      "xpath_xsd": "/ExplanatoryNote/ExplanatoryNoteModifications",
+      "xpath_xsl_anchor": "ExplanatoryNoteModifications",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Изменения в ПД",
+      "subsection": "Номер изменения",
+      "label": "Номер изменения",
+      "xpath_xsd": "/ExplanatoryNote/ExplanatoryNoteModifications/Modification/ModificationNumber",
+      "xpath_xsl_anchor": "ExplanatoryNoteModifications",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Изменения в ПД",
+      "subsection": "Дата изменения",
+      "label": "Дата изменения",
+      "xpath_xsd": "/ExplanatoryNote/ExplanatoryNoteModifications/Modification/ModificationDate",
+      "xpath_xsl_anchor": "ExplanatoryNoteModifications",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Изменения в ПД",
+      "subsection": "Описание изменения",
+      "label": "Описание изменения (необязательное)",
+      "xpath_xsd": "/ExplanatoryNote/ExplanatoryNoteModifications/Modification/ModificationDescription",
+      "xpath_xsl_anchor": "ExplanatoryNoteModifications",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Генеральный проектировщик",
+      "subsection": "Тип автора",
+      "label": "Тип автора: организация / ИП / иностранная организация",
+      "xpath_xsd": "/ExplanatoryNote/IssueAuthor",
+      "xpath_xsl_anchor": "IssueAuthor",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Генеральный проектировщик",
+      "subsection": "Наименование организации",
+      "label": "Полное наименование организации-автора",
+      "xpath_xsd": "/ExplanatoryNote/IssueAuthor/Organization/OrgFullName",
+      "xpath_xsl_anchor": "IssueAuthor",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Генеральный проектировщик",
+      "subsection": "Краткое наименование",
+      "label": "Краткое наименование организации-автора",
+      "xpath_xsd": "/ExplanatoryNote/IssueAuthor/Organization/OrgShortName",
+      "xpath_xsl_anchor": "IssueAuthor",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Генеральный проектировщик",
+      "subsection": "ОГРН",
+      "label": "ОГРН организации-автора",
+      "xpath_xsd": "/ExplanatoryNote/IssueAuthor/Organization/OrgOGRN",
+      "xpath_xsl_anchor": "IssueAuthor",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Генеральный проектировщик",
+      "subsection": "ИНН",
+      "label": "ИНН организации-автора",
+      "xpath_xsd": "/ExplanatoryNote/IssueAuthor/Organization/OrgINN",
+      "xpath_xsl_anchor": "IssueAuthor",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Генеральный проектировщик",
+      "subsection": "КПП",
+      "label": "КПП организации-автора",
+      "xpath_xsd": "/ExplanatoryNote/IssueAuthor/Organization/OrgKPP",
+      "xpath_xsl_anchor": "IssueAuthor",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Генеральный проектировщик",
+      "subsection": "Адрес — код региона",
+      "label": "Код субъекта РФ (адрес автора)",
+      "xpath_xsd": "/ExplanatoryNote/IssueAuthor/Organization/Address/RussianAddress/RegionCode",
+      "xpath_xsl_anchor": "IssueAuthor",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Генеральный проектировщик",
+      "subsection": "Адрес — код ОКТМО",
+      "label": "Код ОКТМО (адрес автора)",
+      "xpath_xsd": "/ExplanatoryNote/IssueAuthor/Organization/Address/RussianAddress/OKTMOCode",
+      "xpath_xsl_anchor": "IssueAuthor",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Генеральный проектировщик",
+      "subsection": "Адрес — наименование МО",
+      "label": "Наименование муниципального образования (адрес автора)",
+      "xpath_xsd": "/ExplanatoryNote/IssueAuthor/Organization/Address/RussianAddress/OKTMOName",
+      "xpath_xsl_anchor": "IssueAuthor",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Генеральный проектировщик",
+      "subsection": "Адрес — район",
+      "label": "Район (адрес автора)",
+      "xpath_xsd": "/ExplanatoryNote/IssueAuthor/Organization/Address/RussianAddress/District",
+      "xpath_xsl_anchor": "IssueAuthor",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Генеральный проектировщик",
+      "subsection": "Адрес — город",
+      "label": "Город (адрес автора)",
+      "xpath_xsd": "/ExplanatoryNote/IssueAuthor/Organization/Address/RussianAddress/City",
+      "xpath_xsl_anchor": "IssueAuthor",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Генеральный проектировщик",
+      "subsection": "Адрес — населённый пункт",
+      "label": "Населённый пункт (адрес автора)",
+      "xpath_xsd": "/ExplanatoryNote/IssueAuthor/Organization/Address/RussianAddress/Settlement",
+      "xpath_xsl_anchor": "IssueAuthor",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Генеральный проектировщик",
+      "subsection": "Адрес — улица",
+      "label": "Улица (адрес автора)",
+      "xpath_xsd": "/ExplanatoryNote/IssueAuthor/Organization/Address/RussianAddress/Street",
+      "xpath_xsl_anchor": "IssueAuthor",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Генеральный проектировщик",
+      "subsection": "Адрес — дом/строение",
+      "label": "Дом/строение (адрес автора)",
+      "xpath_xsd": "/ExplanatoryNote/IssueAuthor/Organization/Address/RussianAddress/Building",
+      "xpath_xsl_anchor": "IssueAuthor",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Генеральный проектировщик",
+      "subsection": "СРО — наименование",
+      "label": "Наименование СРО автора",
+      "xpath_xsd": "/ExplanatoryNote/IssueAuthor/Organization/SROMembership/SROName",
+      "xpath_xsl_anchor": "IssueAuthor",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Генеральный проектировщик",
+      "subsection": "СРО — ОГРН",
+      "label": "ОГРН СРО автора",
+      "xpath_xsd": "/ExplanatoryNote/IssueAuthor/Organization/SROMembership/SROOGRN",
+      "xpath_xsl_anchor": "IssueAuthor",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Генеральный проектировщик",
+      "subsection": "СРО — номер свидетельства",
+      "label": "Номер свидетельства СРО автора",
+      "xpath_xsd": "/ExplanatoryNote/IssueAuthor/Organization/SROMembership/SROCertNumber",
+      "xpath_xsl_anchor": "IssueAuthor",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Генеральный проектировщик",
+      "subsection": "СРО — дата выдачи свидетельства",
+      "label": "Дата выдачи свидетельства СРО автора",
+      "xpath_xsd": "/ExplanatoryNote/IssueAuthor/Organization/SROMembership/SROCertDate",
+      "xpath_xsl_anchor": "IssueAuthor",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Генеральный проектировщик",
+      "subsection": "ИП — фамилия",
+      "label": "Фамилия ИП-автора",
+      "xpath_xsd": "/ExplanatoryNote/IssueAuthor/IP/FamilyName",
+      "xpath_xsl_anchor": "IssueAuthor",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Генеральный проектировщик",
+      "subsection": "ИП — имя",
+      "label": "Имя ИП-автора",
+      "xpath_xsd": "/ExplanatoryNote/IssueAuthor/IP/FirstName",
+      "xpath_xsl_anchor": "IssueAuthor",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Генеральный проектировщик",
+      "subsection": "ИП — отчество",
+      "label": "Отчество ИП-автора",
+      "xpath_xsd": "/ExplanatoryNote/IssueAuthor/IP/SecondName",
+      "xpath_xsl_anchor": "IssueAuthor",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Генеральный проектировщик",
+      "subsection": "Иностранная организация — наименование",
+      "label": "Наименование иностранной организации-автора",
+      "xpath_xsd": "/ExplanatoryNote/IssueAuthor/ForeignOrganization/OrgFullName",
+      "xpath_xsl_anchor": "IssueAuthor",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Соисполнители",
+      "subsection": "Блок соисполнителей",
+      "label": "Сведения об иных ИП/ЮЛ, подготовивших ПД (кроме генпроектировщика)",
+      "xpath_xsd": "/ExplanatoryNote/ProjectDocumentationAuthors",
+      "xpath_xsl_anchor": "ProjectDocumentationAuthors",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Соисполнители",
+      "subsection": "Наименование организации соисполнителя",
+      "label": "Полное наименование организации-соисполнителя",
+      "xpath_xsd": "/ExplanatoryNote/ProjectDocumentationAuthors/ProjectDocumentationAuthor/Organization/OrgFullName",
+      "xpath_xsl_anchor": "ProjectDocumentationAuthors",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Соисполнители",
+      "subsection": "ОГРН соисполнителя",
+      "label": "ОГРН организации-соисполнителя",
+      "xpath_xsd": "/ExplanatoryNote/ProjectDocumentationAuthors/ProjectDocumentationAuthor/Organization/OrgOGRN",
+      "xpath_xsl_anchor": "ProjectDocumentationAuthors",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Соисполнители",
+      "subsection": "ИНН соисполнителя",
+      "label": "ИНН организации-соисполнителя",
+      "xpath_xsd": "/ExplanatoryNote/ProjectDocumentationAuthors/ProjectDocumentationAuthor/Organization/OrgINN",
+      "xpath_xsl_anchor": "ProjectDocumentationAuthors",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Соисполнители",
+      "subsection": "КПП соисполнителя",
+      "label": "КПП организации-соисполнителя",
+      "xpath_xsd": "/ExplanatoryNote/ProjectDocumentationAuthors/ProjectDocumentationAuthor/Organization/OrgKPP",
+      "xpath_xsl_anchor": "ProjectDocumentationAuthors",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Подписанты",
+      "subsection": "ГИП — фамилия",
+      "label": "Фамилия главного инженера проекта",
+      "xpath_xsd": "/ExplanatoryNote/Signers/ChiefProjectEngineer/FamilyName",
+      "xpath_xsl_anchor": "Signers",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Подписанты",
+      "subsection": "ГИП — имя",
+      "label": "Имя главного инженера проекта",
+      "xpath_xsd": "/ExplanatoryNote/Signers/ChiefProjectEngineer/FirstName",
+      "xpath_xsl_anchor": "Signers",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Подписанты",
+      "subsection": "ГИП — отчество",
+      "label": "Отчество главного инженера проекта",
+      "xpath_xsd": "/ExplanatoryNote/Signers/ChiefProjectEngineer/SecondName",
+      "xpath_xsl_anchor": "Signers",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Подписанты",
+      "subsection": "ГИП — СНИЛС",
+      "label": "СНИЛС главного инженера проекта",
+      "xpath_xsd": "/ExplanatoryNote/Signers/ChiefProjectEngineer/SNILS",
+      "xpath_xsl_anchor": "Signers",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Подписанты",
+      "subsection": "ГИП — номер в НРС НОПРИЗ",
+      "label": "Идентификационный номер ГИП в Национальном реестре специалистов НОПРИЗ",
+      "xpath_xsd": "/ExplanatoryNote/Signers/ChiefProjectEngineer/NRSNumber",
+      "xpath_xsl_anchor": "Signers",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Подписанты",
+      "subsection": "ГАП — фамилия",
+      "label": "Фамилия главного архитектора проекта (необязательно)",
+      "xpath_xsd": "/ExplanatoryNote/Signers/ChiefProjectArchitect/FamilyName",
+      "xpath_xsl_anchor": "Signers",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Подписанты",
+      "subsection": "ГАП — имя",
+      "label": "Имя главного архитектора проекта",
+      "xpath_xsd": "/ExplanatoryNote/Signers/ChiefProjectArchitect/FirstName",
+      "xpath_xsl_anchor": "Signers",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Подписанты",
+      "subsection": "ГАП — отчество",
+      "label": "Отчество главного архитектора проекта",
+      "xpath_xsd": "/ExplanatoryNote/Signers/ChiefProjectArchitect/SecondName",
+      "xpath_xsl_anchor": "Signers",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Подписанты",
+      "subsection": "ГАП — СНИЛС",
+      "label": "СНИЛС главного архитектора проекта",
+      "xpath_xsd": "/ExplanatoryNote/Signers/ChiefProjectArchitect/SNILS",
+      "xpath_xsl_anchor": "Signers",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Подписанты",
+      "subsection": "ГАП — номер в НРС НОПРИЗ",
+      "label": "Идентификационный номер ГАП в НРС НОПРИЗ",
+      "xpath_xsd": "/ExplanatoryNote/Signers/ChiefProjectArchitect/NRSNumber",
+      "xpath_xsl_anchor": "Signers",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Подписанты",
+      "subsection": "Прочие подписанты — должность",
+      "label": "Должность прочего подписанта",
+      "xpath_xsd": "/ExplanatoryNote/Signers/Signer/Position",
+      "xpath_xsl_anchor": "Signers",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Подписанты",
+      "subsection": "Прочие подписанты — фамилия",
+      "label": "Фамилия прочего подписанта",
+      "xpath_xsd": "/ExplanatoryNote/Signers/Signer/FamilyName",
+      "xpath_xsl_anchor": "Signers",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Подписанты",
+      "subsection": "Прочие подписанты — имя",
+      "label": "Имя прочего подписанта",
+      "xpath_xsd": "/ExplanatoryNote/Signers/Signer/FirstName",
+      "xpath_xsl_anchor": "Signers",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Подписанты",
+      "subsection": "Прочие подписанты — отчество",
+      "label": "Отчество прочего подписанта",
+      "xpath_xsd": "/ExplanatoryNote/Signers/Signer/SecondName",
+      "xpath_xsl_anchor": "Signers",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Застройщик",
+      "subsection": "Наименование",
+      "label": "Полное наименование организации-застройщика",
+      "xpath_xsd": "/ExplanatoryNote/Developer/Organization/OrgFullName",
+      "xpath_xsl_anchor": "Developer",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Застройщик",
+      "subsection": "Краткое наименование",
+      "label": "Краткое наименование застройщика",
+      "xpath_xsd": "/ExplanatoryNote/Developer/Organization/OrgShortName",
+      "xpath_xsl_anchor": "Developer",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Застройщик",
+      "subsection": "ОГРН",
+      "label": "ОГРН застройщика",
+      "xpath_xsd": "/ExplanatoryNote/Developer/Organization/OrgOGRN",
+      "xpath_xsl_anchor": "Developer",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Застройщик",
+      "subsection": "ИНН",
+      "label": "ИНН застройщика",
+      "xpath_xsd": "/ExplanatoryNote/Developer/Organization/OrgINN",
+      "xpath_xsl_anchor": "Developer",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Застройщик",
+      "subsection": "КПП",
+      "label": "КПП застройщика",
+      "xpath_xsd": "/ExplanatoryNote/Developer/Organization/OrgKPP",
+      "xpath_xsl_anchor": "Developer",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Застройщик",
+      "subsection": "Адрес — код региона",
+      "label": "Код субъекта РФ (адрес застройщика)",
+      "xpath_xsd": "/ExplanatoryNote/Developer/Organization/Address/RussianAddress/RegionCode",
+      "xpath_xsl_anchor": "Developer",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Застройщик",
+      "subsection": "Адрес — код ОКТМО",
+      "label": "Код ОКТМО (адрес застройщика)",
+      "xpath_xsd": "/ExplanatoryNote/Developer/Organization/Address/RussianAddress/OKTMOCode",
+      "xpath_xsl_anchor": "Developer",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Застройщик",
+      "subsection": "Адрес — наименование МО",
+      "label": "Наименование муниципального образования (адрес застройщика)",
+      "xpath_xsd": "/ExplanatoryNote/Developer/Organization/Address/RussianAddress/OKTMOName",
+      "xpath_xsl_anchor": "Developer",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Застройщик",
+      "subsection": "Адрес — город",
+      "label": "Город (адрес застройщика)",
+      "xpath_xsd": "/ExplanatoryNote/Developer/Organization/Address/RussianAddress/City",
+      "xpath_xsl_anchor": "Developer",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Застройщик",
+      "subsection": "Адрес — улица",
+      "label": "Улица (адрес застройщика)",
+      "xpath_xsd": "/ExplanatoryNote/Developer/Organization/Address/RussianAddress/Street",
+      "xpath_xsl_anchor": "Developer",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Застройщик",
+      "subsection": "Адрес — дом/строение",
+      "label": "Дом/строение (адрес застройщика)",
+      "xpath_xsd": "/ExplanatoryNote/Developer/Organization/Address/RussianAddress/Building",
+      "xpath_xsl_anchor": "Developer",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Застройщик",
+      "subsection": "Почтовый адрес — индекс",
+      "label": "Почтовый индекс застройщика",
+      "xpath_xsd": "/ExplanatoryNote/Developer/Organization/PostAddress/Index",
+      "xpath_xsl_anchor": "Developer",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Застройщик",
+      "subsection": "Почтовый адрес — строка",
+      "label": "Строка почтового адреса застройщика",
+      "xpath_xsd": "/ExplanatoryNote/Developer/Organization/PostAddress/AddressText",
+      "xpath_xsl_anchor": "Developer",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Застройщик",
+      "subsection": "Телефон",
+      "label": "Телефон застройщика",
+      "xpath_xsd": "/ExplanatoryNote/Developer/Organization/Phone",
+      "xpath_xsl_anchor": "Developer",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Застройщик",
+      "subsection": "E-mail",
+      "label": "E-mail застройщика",
+      "xpath_xsd": "/ExplanatoryNote/Developer/Organization/Email",
+      "xpath_xsl_anchor": "Developer",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Технический заказчик",
+      "subsection": "Наименование",
+      "label": "Полное наименование технического заказчика",
+      "xpath_xsd": "/ExplanatoryNote/TechnicalCustomer/Organization/OrgFullName",
+      "xpath_xsl_anchor": "TechnicalCustomer",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Технический заказчик",
+      "subsection": "ОГРН",
+      "label": "ОГРН технического заказчика",
+      "xpath_xsd": "/ExplanatoryNote/TechnicalCustomer/Organization/OrgOGRN",
+      "xpath_xsl_anchor": "TechnicalCustomer",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Технический заказчик",
+      "subsection": "ИНН",
+      "label": "ИНН технического заказчика",
+      "xpath_xsd": "/ExplanatoryNote/TechnicalCustomer/Organization/OrgINN",
+      "xpath_xsl_anchor": "TechnicalCustomer",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Технический заказчик",
+      "subsection": "КПП",
+      "label": "КПП технического заказчика",
+      "xpath_xsd": "/ExplanatoryNote/TechnicalCustomer/Organization/OrgKPP",
+      "xpath_xsl_anchor": "TechnicalCustomer",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Технический заказчик",
+      "subsection": "Адрес — код региона",
+      "label": "Код субъекта РФ (адрес технического заказчика)",
+      "xpath_xsd": "/ExplanatoryNote/TechnicalCustomer/Organization/Address/RussianAddress/RegionCode",
+      "xpath_xsl_anchor": "TechnicalCustomer",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Технический заказчик",
+      "subsection": "Адрес — код ОКТМО",
+      "label": "Код ОКТМО (адрес технического заказчика)",
+      "xpath_xsd": "/ExplanatoryNote/TechnicalCustomer/Organization/Address/RussianAddress/OKTMOCode",
+      "xpath_xsl_anchor": "TechnicalCustomer",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Технический заказчик",
+      "subsection": "Адрес — наименование МО",
+      "label": "Наименование МО (адрес технического заказчика)",
+      "xpath_xsd": "/ExplanatoryNote/TechnicalCustomer/Organization/Address/RussianAddress/OKTMOName",
+      "xpath_xsl_anchor": "TechnicalCustomer",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Технический заказчик",
+      "subsection": "Адрес — город",
+      "label": "Город (адрес технического заказчика)",
+      "xpath_xsd": "/ExplanatoryNote/TechnicalCustomer/Organization/Address/RussianAddress/City",
+      "xpath_xsl_anchor": "TechnicalCustomer",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Технический заказчик",
+      "subsection": "Адрес — улица",
+      "label": "Улица (адрес технического заказчика)",
+      "xpath_xsd": "/ExplanatoryNote/TechnicalCustomer/Organization/Address/RussianAddress/Street",
+      "xpath_xsl_anchor": "TechnicalCustomer",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Технический заказчик",
+      "subsection": "Адрес — дом/строение",
+      "label": "Дом/строение (адрес технического заказчика)",
+      "xpath_xsd": "/ExplanatoryNote/TechnicalCustomer/Organization/Address/RussianAddress/Building",
+      "xpath_xsl_anchor": "TechnicalCustomer",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Сокращения",
+      "subsection": "Перечень сокращений",
+      "label": "Перечень используемых сокращений (текстовый блок)",
+      "xpath_xsd": "/ExplanatoryNote/UsedAbbreviations",
+      "xpath_xsl_anchor": "UsedAbbreviations",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Нормативная база",
+      "subsection": "Перечень нормативных документов",
+      "label": "Перечень документов, применение которых обеспечивает соответствие техрегламентам",
+      "xpath_xsd": "/ExplanatoryNote/UsedNorms",
+      "xpath_xsl_anchor": "UsedNorms",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Нормативная база",
+      "subsection": "Документ — обозначение",
+      "label": "Обозначение нормативного документа",
+      "xpath_xsd": "/ExplanatoryNote/UsedNorms/Norm/Designation",
+      "xpath_xsl_anchor": "UsedNorms",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Нормативная база",
+      "subsection": "Документ — наименование",
+      "label": "Наименование нормативного документа",
+      "xpath_xsd": "/ExplanatoryNote/UsedNorms/Norm/Name",
+      "xpath_xsl_anchor": "UsedNorms",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Документы-основания",
+      "subsection": "Перечень оснований",
+      "label": "Перечень документов, на основании которых принято решение о подготовке ПД",
+      "xpath_xsd": "/ExplanatoryNote/ProjectDecisionDocuments",
+      "xpath_xsl_anchor": "ProjectDecisionDocuments",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Документы-основания",
+      "subsection": "Тип документа",
+      "label": "Код типа документа-основания",
+      "xpath_xsd": "/ExplanatoryNote/ProjectDecisionDocuments/Document/DocType",
+      "xpath_xsl_anchor": "ProjectDecisionDocuments",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Документы-основания",
+      "subsection": "Номер документа",
+      "label": "Номер документа-основания",
+      "xpath_xsd": "/ExplanatoryNote/ProjectDecisionDocuments/Document/DocNumber",
+      "xpath_xsl_anchor": "ProjectDecisionDocuments",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Документы-основания",
+      "subsection": "Дата документа",
+      "label": "Дата документа-основания",
+      "xpath_xsd": "/ExplanatoryNote/ProjectDecisionDocuments/Document/DocDate",
+      "xpath_xsl_anchor": "ProjectDecisionDocuments",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Документы-основания",
+      "subsection": "Орган, выдавший документ",
+      "label": "Орган (организация), выдавший документ-основание",
+      "xpath_xsd": "/ExplanatoryNote/ProjectDecisionDocuments/Document/DocOrg",
+      "xpath_xsl_anchor": "ProjectDecisionDocuments",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Документы-основания",
+      "subsection": "Изменения документа",
+      "label": "Описание изменений документа-основания",
+      "xpath_xsd": "/ExplanatoryNote/ProjectDecisionDocuments/Document/DocChanges",
+      "xpath_xsl_anchor": "ProjectDecisionDocuments",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Документы-основания",
+      "subsection": "Ссылка на файл документа",
+      "label": "Имя прикреплённого файла документа-основания",
+      "xpath_xsd": "/ExplanatoryNote/ProjectDecisionDocuments/Document/File/FileName",
+      "xpath_xsl_anchor": "ProjectDecisionDocuments",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Документы-основания",
+      "subsection": "ИУЛ файл",
+      "label": "Имя файла ИУЛ для документа-основания",
+      "xpath_xsd": "/ExplanatoryNote/ProjectDecisionDocuments/Document/IULFile/FileName",
+      "xpath_xsl_anchor": "ProjectDecisionDocuments",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "ИРД",
+      "subsection": "Перечень ИРД",
+      "label": "Перечень исходно-разрешительной документации",
+      "xpath_xsd": "/ExplanatoryNote/ProjectInitialDocuments",
+      "xpath_xsl_anchor": "ProjectInitialDocuments",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "ИРД",
+      "subsection": "Тип документа",
+      "label": "Код типа документа ИРД",
+      "xpath_xsd": "/ExplanatoryNote/ProjectInitialDocuments/Document/DocType",
+      "xpath_xsl_anchor": "ProjectInitialDocuments",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "ИРД",
+      "subsection": "Номер документа",
+      "label": "Номер документа ИРД",
+      "xpath_xsd": "/ExplanatoryNote/ProjectInitialDocuments/Document/DocNumber",
+      "xpath_xsl_anchor": "ProjectInitialDocuments",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "ИРД",
+      "subsection": "Дата документа",
+      "label": "Дата документа ИРД",
+      "xpath_xsd": "/ExplanatoryNote/ProjectInitialDocuments/Document/DocDate",
+      "xpath_xsl_anchor": "ProjectInitialDocuments",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "ИРД",
+      "subsection": "Орган, выдавший документ",
+      "label": "Орган (организация), выдавший документ ИРД",
+      "xpath_xsd": "/ExplanatoryNote/ProjectInitialDocuments/Document/DocOrg",
+      "xpath_xsl_anchor": "ProjectInitialDocuments",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "ИРД",
+      "subsection": "Изменения документа",
+      "label": "Изменения документа ИРД",
+      "xpath_xsd": "/ExplanatoryNote/ProjectInitialDocuments/Document/DocChanges",
+      "xpath_xsl_anchor": "ProjectInitialDocuments",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "ИРД",
+      "subsection": "Ссылка на файл",
+      "label": "Имя прикреплённого файла ИРД",
+      "xpath_xsd": "/ExplanatoryNote/ProjectInitialDocuments/Document/File/FileName",
+      "xpath_xsl_anchor": "ProjectInitialDocuments",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "ИРД",
+      "subsection": "ИУЛ файл",
+      "label": "Имя файла ИУЛ для документа ИРД",
+      "xpath_xsd": "/ExplanatoryNote/ProjectInitialDocuments/Document/IULFile/FileName",
+      "xpath_xsl_anchor": "ProjectInitialDocuments",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Инженерные изыскания",
+      "subsection": "Перечень отчётов",
+      "label": "Перечень отчётной документации по результатам инженерных изысканий",
+      "xpath_xsd": "/ExplanatoryNote/EngineeringSurveyDocuments",
+      "xpath_xsl_anchor": "ProjectInitialDocuments",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Инженерные изыскания",
+      "subsection": "Тип документа",
+      "label": "Код вида инженерных изысканий (06.01–06.11, 06.99)",
+      "xpath_xsd": "/ExplanatoryNote/EngineeringSurveyDocuments/Document/DocType",
+      "xpath_xsl_anchor": "ProjectInitialDocuments",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Инженерные изыскания",
+      "subsection": "Шифр документа",
+      "label": "Шифр отчёта о результатах инженерных изысканий",
+      "xpath_xsd": "/ExplanatoryNote/EngineeringSurveyDocuments/Document/DocNumber",
+      "xpath_xsl_anchor": "ProjectInitialDocuments",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Инженерные изыскания",
+      "subsection": "Дата документа",
+      "label": "Дата документа о результатах инженерных изысканий",
+      "xpath_xsd": "/ExplanatoryNote/EngineeringSurveyDocuments/Document/DocDate",
+      "xpath_xsl_anchor": "ProjectInitialDocuments",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Инженерные изыскания",
+      "subsection": "Исполнитель изысканий",
+      "label": "Организация — исполнитель инженерных изысканий",
+      "xpath_xsd": "/ExplanatoryNote/EngineeringSurveyDocuments/Document/DocOrg",
+      "xpath_xsl_anchor": "ProjectInitialDocuments",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Инженерные изыскания",
+      "subsection": "Изменения",
+      "label": "Сведения об изменениях отчёта",
+      "xpath_xsd": "/ExplanatoryNote/EngineeringSurveyDocuments/Document/DocChanges",
+      "xpath_xsl_anchor": "ProjectInitialDocuments",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Инженерные изыскания",
+      "subsection": "Ссылка на файл",
+      "label": "Имя прикреплённого файла отчёта о результатах изысканий",
+      "xpath_xsd": "/ExplanatoryNote/EngineeringSurveyDocuments/Document/File/FileName",
+      "xpath_xsl_anchor": "ProjectInitialDocuments",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Инженерные изыскания",
+      "subsection": "ИУЛ файл",
+      "label": "Имя файла ИУЛ для отчёта об инженерных изысканиях",
+      "xpath_xsd": "/ExplanatoryNote/EngineeringSurveyDocuments/Document/IULFile/FileName",
+      "xpath_xsl_anchor": "ProjectInitialDocuments",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Дополнительные материалы",
+      "subsection": "Блок дополнительных материалов",
+      "label": "Дополнительные материалы, не предусмотренные ПП 87",
+      "xpath_xsd": "/ExplanatoryNote/AdditionalData",
+      "xpath_xsl_anchor": "AdditionalData",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Дополнительные материалы",
+      "subsection": "Наименование материала",
+      "label": "Наименование дополнительного материала",
+      "xpath_xsd": "/ExplanatoryNote/AdditionalData/AdditionalDocument/Name",
+      "xpath_xsl_anchor": "AdditionalData",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Дополнительные материалы",
+      "subsection": "Ссылка на файл",
+      "label": "Имя файла дополнительного материала",
+      "xpath_xsd": "/ExplanatoryNote/AdditionalData/AdditionalDocument/File/FileName",
+      "xpath_xsl_anchor": "AdditionalData",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Источники финансирования",
+      "subsection": "Блок финансирования",
+      "label": "Сведения об источниках финансирования строительства",
+      "xpath_xsd": "/ExplanatoryNote/FinanceSources",
+      "xpath_xsl_anchor": "FinanceSources",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Источники финансирования",
+      "subsection": "Федеральный бюджет — объём",
+      "label": "Объём финансирования из федерального бюджета",
+      "xpath_xsd": "/ExplanatoryNote/FinanceSources/Budget[@Level='1']/Amount",
+      "xpath_xsl_anchor": "FinanceSources",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Источники финансирования",
+      "subsection": "Региональный бюджет — объём",
+      "label": "Объём финансирования из регионального бюджета",
+      "xpath_xsd": "/ExplanatoryNote/FinanceSources/Budget[@Level='2']/Amount",
+      "xpath_xsl_anchor": "FinanceSources",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Источники финансирования",
+      "subsection": "Местный бюджет — объём",
+      "label": "Объём финансирования из местного бюджета",
+      "xpath_xsd": "/ExplanatoryNote/FinanceSources/Budget[@Level='3']/Amount",
+      "xpath_xsl_anchor": "FinanceSources",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Источники финансирования",
+      "subsection": "Внебюджетные средства",
+      "label": "Объём внебюджетного финансирования",
+      "xpath_xsd": "/ExplanatoryNote/FinanceSources/ExtraBudgetaryFunds/Amount",
+      "xpath_xsl_anchor": "FinanceSources",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Источники финансирования",
+      "subsection": "Решение руководителя госкомпании",
+      "label": "Реквизиты решения руководителя государственной компании/корпорации",
+      "xpath_xsd": "/ExplanatoryNote/FinanceSources/ExtraBudgetaryFunds/CorporationDecision",
+      "xpath_xsl_anchor": "FinanceSources",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Объект",
+      "subsection": "Наименование",
+      "label": "Наименование объекта капитального строительства",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/Name",
+      "xpath_xsl_anchor": "Object",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Объект",
+      "subsection": "Вид работ",
+      "label": "Вид работ (тип строительства), код 1–5",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/ConstructionType",
+      "xpath_xsl_anchor": "ConstructionType",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Объект",
+      "subsection": "Продолжительность строительства",
+      "label": "Продолжительность строительства, месяц",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/ConstructionDuration",
+      "xpath_xsl_anchor": "Object",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Объект",
+      "subsection": "Дата начала строительства",
+      "label": "Дата начала строительства",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/ConstructionDates/BeginDate",
+      "xpath_xsl_anchor": "Object",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Объект",
+      "subsection": "Дата окончания строительства",
+      "label": "Дата окончания строительства",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/ConstructionDates/EndDate",
+      "xpath_xsl_anchor": "Object",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Объект",
+      "subsection": "Дата ввода в эксплуатацию",
+      "label": "Дата ввода объекта в эксплуатацию",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/ConstructionDates/OperationDate",
+      "xpath_xsl_anchor": "Object",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Объект",
+      "subsection": "Тип размещения",
+      "label": "Признак размещения объекта (1=новое, 2=существующее)",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/@Placement",
+      "xpath_xsl_anchor": "Object",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Объект",
+      "subsection": "Особо опасный и технически сложный",
+      "label": "Признак особо опасного и технически сложного объекта",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/@DangerousAndComplex",
+      "xpath_xsl_anchor": "Object",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Объект",
+      "subsection": "Уникальный объект",
+      "label": "Признак уникального объекта",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/@Unique",
+      "xpath_xsl_anchor": "Object",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Объект",
+      "subsection": "Код Электронного бюджета",
+      "label": "Уникальный код объекта в системе «Электронный бюджет»",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/@ElectronicBudgetObjectCode",
+      "xpath_xsl_anchor": "Object",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Объект",
+      "subsection": "Национальный проект — наименование",
+      "label": "Наименование национального/федерального/регионального проекта",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/NationalProject/ProjectName",
+      "xpath_xsl_anchor": "Object",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Объект",
+      "subsection": "Национальный проект — федеральный проект",
+      "label": "Наименование федерального проекта в составе национального проекта",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/NationalProject/FederalProjectName",
+      "xpath_xsl_anchor": "Object",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Адрес объекта",
+      "subsection": "Код региона",
+      "label": "Код субъекта РФ (адрес объекта)",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/Address/RussianAddress/RegionCode",
+      "xpath_xsl_anchor": "Object",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Адрес объекта",
+      "subsection": "Код ОКТМО",
+      "label": "Код ОКТМО (адрес объекта)",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/Address/RussianAddress/OKTMOCode",
+      "xpath_xsl_anchor": "Object",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Адрес объекта",
+      "subsection": "Наименование МО",
+      "label": "Наименование муниципального образования (адрес объекта)",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/Address/RussianAddress/OKTMOName",
+      "xpath_xsl_anchor": "Object",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Адрес объекта",
+      "subsection": "Район",
+      "label": "Район (адрес объекта)",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/Address/RussianAddress/District",
+      "xpath_xsl_anchor": "Object",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Адрес объекта",
+      "subsection": "Город",
+      "label": "Город (адрес объекта)",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/Address/RussianAddress/City",
+      "xpath_xsl_anchor": "Object",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Адрес объекта",
+      "subsection": "Населённый пункт",
+      "label": "Населённый пункт (адрес объекта)",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/Address/RussianAddress/Settlement",
+      "xpath_xsl_anchor": "Object",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Адрес объекта",
+      "subsection": "Улица",
+      "label": "Улица (адрес объекта)",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/Address/RussianAddress/Street",
+      "xpath_xsl_anchor": "Object",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Адрес объекта",
+      "subsection": "Дом/строение",
+      "label": "Дом/строение (адрес объекта)",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/Address/RussianAddress/Building",
+      "xpath_xsl_anchor": "Object",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Линейный объект — начальный адрес",
+      "subsection": "Код региона",
+      "label": "Код субъекта РФ (начальный пункт трассы)",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/Address/RussianAddress/RegionCode",
+      "xpath_xsl_anchor": "LinearObject",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Линейный объект — начальный адрес",
+      "subsection": "Код ОКТМО",
+      "label": "Код ОКТМО (начальный пункт трассы)",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/Address/RussianAddress/OKTMOCode",
+      "xpath_xsl_anchor": "LinearObject",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Линейный объект — начальный адрес",
+      "subsection": "Наименование МО",
+      "label": "Наименование МО (начальный пункт трассы)",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/Address/RussianAddress/OKTMOName",
+      "xpath_xsl_anchor": "LinearObject",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Линейный объект — начальный адрес",
+      "subsection": "Город",
+      "label": "Город/населённый пункт начального пункта трассы",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/Address/RussianAddress/City",
+      "xpath_xsl_anchor": "LinearObject",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Линейный объект — конечный адрес",
+      "subsection": "Код региона",
+      "label": "Код субъекта РФ (конечный пункт трассы)",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/FinishAddress/RussianAddress/RegionCode",
+      "xpath_xsl_anchor": "LinearObject",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Линейный объект — конечный адрес",
+      "subsection": "Код ОКТМО",
+      "label": "Код ОКТМО (конечный пункт трассы)",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/FinishAddress/RussianAddress/OKTMOCode",
+      "xpath_xsl_anchor": "LinearObject",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Линейный объект — конечный адрес",
+      "subsection": "Наименование МО",
+      "label": "Наименование МО (конечный пункт трассы)",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/FinishAddress/RussianAddress/OKTMOName",
+      "xpath_xsl_anchor": "LinearObject",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Линейный объект — конечный адрес",
+      "subsection": "Город",
+      "label": "Город/населённый пункт конечного пункта трассы",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/FinishAddress/RussianAddress/City",
+      "xpath_xsl_anchor": "LinearObject",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Функциональное назначение",
+      "subsection": "Функции объекта",
+      "label": "Сведения о функциональном назначении, составе и характеристике производства",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/Functions",
+      "xpath_xsl_anchor": "Functions",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Функциональное назначение",
+      "subsection": "Классификатор функций — код",
+      "label": "Код функционального назначения по классификатору",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/Functions/FunctionsClass",
+      "xpath_xsl_anchor": "Functions",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Функциональное назначение",
+      "subsection": "Классификатор функций — наименование",
+      "label": "Наименование функционального назначения по классификатору",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/Functions/FunctionsClassName",
+      "xpath_xsl_anchor": "Functions",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Функциональное назначение",
+      "subsection": "Описание функций",
+      "label": "Текстовое описание функционального назначения объекта",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/Functions/FunctionsNote",
+      "xpath_xsl_anchor": "Functions",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Функциональное назначение",
+      "subsection": "Сведения о линейном объекте",
+      "label": "Текстовое описание линейного объекта",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/LinearObjectNote",
+      "xpath_xsl_anchor": "Functions",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Функциональное назначение",
+      "subsection": "Принадлежность к объектам транспортной инфраструктуры",
+      "label": "Принадлежность к объектам транспортной инфраструктуры (FunctionsFeatures)",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/FunctionsFeatures",
+      "xpath_xsl_anchor": "FunctionsFeatures",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Проектная мощность",
+      "subsection": "Наименование показателя мощности",
+      "label": "Наименование показателя проектной мощности",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/PowerIndicator/Name",
+      "xpath_xsl_anchor": "PowerIndicator",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Проектная мощность",
+      "subsection": "Единица измерения мощности",
+      "label": "Единица измерения показателя мощности (код ОКЕИ)",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/PowerIndicator/Measure",
+      "xpath_xsl_anchor": "PowerIndicator",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Проектная мощность",
+      "subsection": "Значение мощности",
+      "label": "Значение показателя проектной мощности",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/PowerIndicator/Value",
+      "xpath_xsl_anchor": "PowerIndicator",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "ТЭП",
+      "subsection": "Наименование показателя",
+      "label": "Наименование технико-экономического показателя",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/TEI/Name",
+      "xpath_xsl_anchor": "TEI",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "ТЭП",
+      "subsection": "Единица измерения",
+      "label": "Единица измерения ТЭП (код ОКЕИ)",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/TEI/Measure",
+      "xpath_xsl_anchor": "TEI",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "ТЭП",
+      "subsection": "Значение",
+      "label": "Значение технико-экономического показателя",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/TEI/Value",
+      "xpath_xsl_anchor": "TEI",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Энергоэффективность",
+      "subsection": "Класс энергетической эффективности",
+      "label": "Класс энергетической эффективности здания/сооружения",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/EnergyEfficiency/EfficiencyClass",
+      "xpath_xsl_anchor": "EnergyEfficiency",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Энергоэффективность",
+      "subsection": "Описание мероприятий по повышению энергоэффективности",
+      "label": "Сведения о мероприятиях по повышению энергетической эффективности (текст)",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/EnergyEfficiency/EnergyEfficiencyNote",
+      "xpath_xsl_anchor": "EnergyEfficiency",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Класс опасности ОПО",
+      "subsection": "Класс опасности ОПО",
+      "label": "Класс опасности опасного производственного объекта",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/DangerousIndustrialObject",
+      "xpath_xsl_anchor": "DangerousIndustrialObject",
+      "applicability": "Только пр/лин"
+    },
+    {
+      "section": "Пожарная опасность",
+      "subsection": "Категория пожарной и взрывопожарной опасности",
+      "label": "Категория пожарной и взрывопожарной опасности",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/FireDangerCategory",
+      "xpath_xsl_anchor": "FireDangerCategory",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Пребывание людей",
+      "subsection": "Сведения о постоянном пребывании людей",
+      "label": "Сведения о наличии помещений с постоянным пребыванием людей (текст)",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/PeoplePermanentStay",
+      "xpath_xsl_anchor": "PeoplePermanentStay",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Уровень ответственности",
+      "subsection": "Уровень ответственности объекта",
+      "label": "Уровень ответственности объекта капитального строительства",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/ResponsibilityLevel",
+      "xpath_xsl_anchor": "ResponsibilityLevel",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Составные части объекта",
+      "subsection": "Состав объекта (ObjectParts)",
+      "label": "Сведения о составных частях сложного (составного) объекта",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/ObjectParts",
+      "xpath_xsl_anchor": "Parts",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Составные части объекта",
+      "subsection": "Наименование составной части",
+      "label": "Наименование составной части объекта",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/ObjectParts/ObjectPart/Name",
+      "xpath_xsl_anchor": "Parts",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Составные части объекта",
+      "subsection": "Вид работ по составной части",
+      "label": "Вид работ для составной части (ConstructionType)",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/ObjectParts/ObjectPart/ConstructionType",
+      "xpath_xsl_anchor": "Parts",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Климатические условия",
+      "subsection": "Климатический район/подрайон",
+      "label": "Климатический район/подрайон строительства",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/ClimateConditions/ClimateDistrict",
+      "xpath_xsl_anchor": "ClimateConditions",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Климатические условия",
+      "subsection": "Инженерно-геологические условия",
+      "label": "Инженерно-геологические условия площадки строительства",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/ClimateConditions/GeologicalConditions",
+      "xpath_xsl_anchor": "ClimateConditions",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Климатические условия",
+      "subsection": "Ветровой район",
+      "label": "Ветровой район строительства",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/ClimateConditions/WindDistrict",
+      "xpath_xsl_anchor": "ClimateConditions",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Климатические условия",
+      "subsection": "Снеговой район",
+      "label": "Снеговой район строительства",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/ClimateConditions/SnowDistrict",
+      "xpath_xsl_anchor": "ClimateConditions",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Климатические условия",
+      "subsection": "Сейсмичность",
+      "label": "Сейсмическая активность территории строительства (баллы)",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/ClimateConditions/SeismicActivity",
+      "xpath_xsl_anchor": "ClimateConditions",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Климатические условия",
+      "subsection": "Опасные природные процессы",
+      "label": "Возможность опасных природных процессов и явлений на территории строительства",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/ClimateConditions/DangerousNatureProcesses",
+      "xpath_xsl_anchor": "DangerousNatureProcesses",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Ресурсы",
+      "subsection": "Потребность в ресурсах",
+      "label": "Сведения о потребности объекта в топливе, газе, воде и электроэнергии",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/Resources",
+      "xpath_xsl_anchor": "Resources",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Ресурсы",
+      "subsection": "Потребность в топливе",
+      "label": "Потребность в топливе (тип и объём)",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/Resources/Fuel",
+      "xpath_xsl_anchor": "Resources",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Ресурсы",
+      "subsection": "Потребность в газе",
+      "label": "Потребность в газе",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/Resources/Gas",
+      "xpath_xsl_anchor": "Resources",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Ресурсы",
+      "subsection": "Потребность в воде",
+      "label": "Потребность в воде",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/Resources/Water",
+      "xpath_xsl_anchor": "Resources",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Ресурсы",
+      "subsection": "Потребность в электроэнергии",
+      "label": "Потребность в электрической энергии",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/Resources/Electricity",
+      "xpath_xsl_anchor": "Resources",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Ресурсы",
+      "subsection": "Сырьевая база",
+      "label": "Сведения о сырьевой базе, потребности производства в воде и ТЭР",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/RawResources",
+      "xpath_xsl_anchor": "RawResources",
+      "applicability": "Только пр"
+    },
+    {
+      "section": "Ресурсы",
+      "subsection": "Комплексное использование сырья",
+      "label": "Сведения о комплексном использовании сырья, вторичных энергоресурсов, отходов",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/ResourceUseInfo",
+      "xpath_xsl_anchor": "ResourceUseInfo",
+      "applicability": "Только пр"
+    },
+    {
+      "section": "Ресурсы",
+      "subsection": "Возобновляемые источники энергии",
+      "label": "Сведения об использовании возобновляемых источников энергии и ВЭР",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/RenewableSourceInfo",
+      "xpath_xsl_anchor": "RenewableSourceInfo",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Земельный участок",
+      "subsection": "Категория земель",
+      "label": "Категория земель, на которых располагается (будет располагаться) объект",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/LandCategory",
+      "xpath_xsl_anchor": "LandCategory",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Земельный участок",
+      "subsection": "Земельные участки — изъятие/сервитут",
+      "label": "Сведения об изымаемых земельных участках и сервитутах",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/LandInfo",
+      "xpath_xsl_anchor": "LandInfo",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Земельный участок",
+      "subsection": "Компенсация правообладателям",
+      "label": "Сведения о размере средств для возмещения убытков правообладателям ЗУ",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/LandFunds",
+      "xpath_xsl_anchor": "LandFunds",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Патенты",
+      "subsection": "Использованные изобретения и патентные исследования",
+      "label": "Сведения об использованных изобретениях и результатах патентных исследований",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/PatentsUsed",
+      "xpath_xsl_anchor": "PatentsUsed",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Специальные технические условия",
+      "subsection": "Разработанные и согласованные СТУ",
+      "label": "Сведения о наличии разработанных и согласованных специальных технических условий",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/SpecialRequirements",
+      "xpath_xsl_anchor": "SpecialRequirements",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Персонал",
+      "subsection": "Численность работников и состав рабочих мест",
+      "label": "Данные о численности работников, профессионально-квалификационном составе и числе рабочих мест",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/StaffNote",
+      "xpath_xsl_anchor": "StaffNote",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Программное обеспечение",
+      "subsection": "Перечень программ расчётов конструкций",
+      "label": "Сведения о компьютерных программах для расчётов конструктивных элементов",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/SoftwareUsed",
+      "xpath_xsl_anchor": "SoftwareUsed",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Программное обеспечение",
+      "subsection": "Наименование программы",
+      "label": "Наименование программы для расчётов",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/SoftwareUsed/Software/Name",
+      "xpath_xsl_anchor": "SoftwareUsed",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Программное обеспечение",
+      "subsection": "Версия программы",
+      "label": "Версия программы для расчётов",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/SoftwareUsed/Software/Version",
+      "xpath_xsl_anchor": "SoftwareUsed",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Этапы строительства",
+      "subsection": "Обоснование этапности",
+      "label": "Обоснование возможности осуществления строительства по этапам",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/StagesInfo",
+      "xpath_xsl_anchor": "StagesInfo",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Этапы строительства",
+      "subsection": "Этап — номер",
+      "label": "Порядковый номер этапа строительства",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/StagesInfo/Stage/Number",
+      "xpath_xsl_anchor": "StagesInfo",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Этапы строительства",
+      "subsection": "Этап — наименование",
+      "label": "Наименование этапа строительства",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/StagesInfo/Stage/Name",
+      "xpath_xsl_anchor": "StagesInfo",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Этапы строительства",
+      "subsection": "Этап — дата начала",
+      "label": "Дата начала этапа строительства",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/StagesInfo/Stage/BeginDate",
+      "xpath_xsl_anchor": "StagesInfo",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Этапы строительства",
+      "subsection": "Этап — дата окончания",
+      "label": "Дата окончания этапа строительства",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/StagesInfo/Stage/EndDate",
+      "xpath_xsl_anchor": "StagesInfo",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Этапы строительства",
+      "subsection": "Этап — дата ввода",
+      "label": "Дата ввода в эксплуатацию по этапу",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/StagesInfo/Stage/OperationDate",
+      "xpath_xsl_anchor": "StagesInfo",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Этапы строительства",
+      "subsection": "Этап — продолжительность",
+      "label": "Продолжительность этапа строительства (месяц)",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/StagesInfo/Stage/ConstructionDuration",
+      "xpath_xsl_anchor": "StagesInfo",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Снос объектов",
+      "subsection": "Затраты на снос, переселение, перенос сетей",
+      "label": "Сведения о предполагаемых затратах на снос зданий и сооружений",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/DestroyFunds",
+      "xpath_xsl_anchor": "DestroyFunds",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Ссылки на разделы ПД",
+      "subsection": "Ссылки на разделы об энергоэффективности",
+      "label": "Разделы и пункты ПД с решениями по энергетической эффективности",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/EnergyEfficiencyLinks",
+      "xpath_xsl_anchor": "EnergyEfficiencyLinks",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Ссылки на разделы ПД",
+      "subsection": "Ссылки на разделы о промышленной безопасности",
+      "label": "Разделы и пункты ПД с решениями по промышленной безопасности",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/IndustrialSafetyLinks",
+      "xpath_xsl_anchor": "IndustrialSafetyLinks",
+      "applicability": "Только пр/лин"
+    },
+    {
+      "section": "Ссылки на разделы ПД",
+      "subsection": "Проект рекультивации земель",
+      "label": "Сведения о наличии проекта рекультивации земель",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/LandReclamationLink",
+      "xpath_xsl_anchor": "LandReclamationLink",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Линейный объект",
+      "subsection": "Категория линейного объекта",
+      "label": "Категория линейного объекта",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/LinearObjectCategory",
+      "xpath_xsl_anchor": "LinearObjectCategory",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Линейный объект",
+      "subsection": "Класс линейного объекта",
+      "label": "Класс линейного объекта",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/LinearObjectClass",
+      "xpath_xsl_anchor": "LinearObjectClass",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Линейный объект",
+      "subsection": "Варианты маршрутов трассы",
+      "label": "Описание вариантов маршрутов прохождения линейного объекта",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/Routes",
+      "xpath_xsl_anchor": "Routes",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Линейный объект",
+      "subsection": "Маршрут — наименование",
+      "label": "Наименование варианта маршрута трассы",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/Routes/Route/Name",
+      "xpath_xsl_anchor": "Routes",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Линейный объект",
+      "subsection": "Маршрут — обоснование",
+      "label": "Обоснование варианта маршрута трассы (текст)",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/Routes/Route/Description",
+      "xpath_xsl_anchor": "Routes",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Линейный объект",
+      "subsection": "Маршрут — выбранный",
+      "label": "Признак выбранного варианта маршрута трассы (@Selected)",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/Routes/Route/@Selected",
+      "xpath_xsl_anchor": "Routes",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Линейный объект",
+      "subsection": "Защита территории от опасных процессов",
+      "label": "Инженерная защита территории (EngineeringTerritoryProtection)",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/EngineeringTerritoryProtection",
+      "xpath_xsl_anchor": "EngineeringTerritoryProtection",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Атомные станции",
+      "subsection": "Перечень объектов АС",
+      "label": "Список объектов производственного и непроизводственного назначения в составе АС",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/NuclearPlantFeatures/ObjectList",
+      "xpath_xsl_anchor": "NuclearPlantFeaturesObjectList",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Атомные станции",
+      "subsection": "Ядерная и радиационная безопасность",
+      "label": "Общие сведения о требованиях к системам ядерной и радиационной безопасности АС",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/NuclearPlantFeatures/NuclearSafety",
+      "xpath_xsl_anchor": "NuclearPlantFeaturesNuclearSafety",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Атомные станции",
+      "subsection": "Пределы безопасной эксплуатации",
+      "label": "Исходные данные, пределы безопасной эксплуатации и эксплуатационные пределы АС",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/NuclearPlantFeatures/OperationalLimits",
+      "xpath_xsl_anchor": "NuclearPlantFeaturesOperationalLimits",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Атомные станции",
+      "subsection": "Управление АС",
+      "label": "Сведения об организации управления АС, эксплуатационном обслуживании и персонале",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/NuclearPlantFeatures/NuclearPlantControl",
+      "xpath_xsl_anchor": "NuclearPlantFeaturesNuclearPlantControl",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Атомные станции",
+      "subsection": "Реакторная установка",
+      "label": "Сведения о реакторной установке, применяемой на АС",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/NuclearPlantFeatures/ReactorPlant",
+      "xpath_xsl_anchor": "NuclearPlantFeaturesReactorPlant",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Атомные станции",
+      "subsection": "Программы обеспечения безопасности АС",
+      "label": "Сведения о программах, используемых для анализа безопасности АС",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/NuclearPlantFeatures/NuclearSafitySoftware",
+      "xpath_xsl_anchor": "NuclearPlantFeaturesNuclearSafitySoftware",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Атомные станции",
+      "subsection": "Программы мониторинга — геотехнический мониторинг",
+      "label": "Программа геотехнического мониторинга АС (включая мониторинг кренов и осадок)",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/NuclearPlantFeatures/MonitoringPrograms/GeotechnicalMonitoring",
+      "xpath_xsl_anchor": "NuclearPlantFeaturesNuclearMonitoringPrograms1",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Атомные станции",
+      "subsection": "Программы мониторинга — гидрогеологический мониторинг",
+      "label": "Программа гидрогеологического мониторинга АС",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/NuclearPlantFeatures/MonitoringPrograms/HydrogeologicalMonitoring",
+      "xpath_xsl_anchor": "NuclearPlantFeaturesNuclearMonitoringPrograms2",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Атомные станции",
+      "subsection": "Программы мониторинга — сейсмический мониторинг",
+      "label": "Программа сейсмического мониторинга АС",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/NuclearPlantFeatures/MonitoringPrograms/SeismicMonitoring",
+      "xpath_xsl_anchor": "NuclearPlantFeaturesNuclearMonitoringPrograms3",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Атомные станции",
+      "subsection": "Программы мониторинга — радиационный мониторинг",
+      "label": "Программа радиационного мониторинга АС",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/NuclearPlantFeatures/MonitoringPrograms/RadiationMonitoring",
+      "xpath_xsl_anchor": "NuclearPlantFeaturesNuclearMonitoringPrograms4",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Атомные станции",
+      "subsection": "Программы мониторинга — мониторинг конструкций",
+      "label": "Программа мониторинга технического состояния конструкций АС",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/NuclearPlantFeatures/MonitoringPrograms/StructuralMonitoring",
+      "xpath_xsl_anchor": "NuclearPlantFeaturesNuclearMonitoringPrograms5",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Атомные станции",
+      "subsection": "Программы мониторинга — метеорологический мониторинг",
+      "label": "Программа метеорологического мониторинга АС",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/NuclearPlantFeatures/MonitoringPrograms/MeteorologicalMonitoring",
+      "xpath_xsl_anchor": "NuclearPlantFeaturesNuclearMonitoringPrograms6",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Атомные станции",
+      "subsection": "Программы мониторинга — гидрологический мониторинг",
+      "label": "Программа гидрологического мониторинга АС",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/NuclearPlantFeatures/MonitoringPrograms/HydrologicalMonitoring",
+      "xpath_xsl_anchor": "NuclearPlantFeaturesNuclearMonitoringPrograms7",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Атомные станции",
+      "subsection": "Программы мониторинга — мониторинг грунтовой плотины",
+      "label": "Программа мониторинга грунтовой плотины АС",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/NuclearPlantFeatures/MonitoringPrograms/EarthDamMonitoring",
+      "xpath_xsl_anchor": "NuclearPlantFeaturesNuclearMonitoringPrograms8",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Газораспределительные сети",
+      "subsection": "Прочностные расчёты",
+      "label": "Расчёты прочности элементов сети газораспределения",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/GasNetworksFeatures/StrengthCalculation",
+      "xpath_xsl_anchor": "GasNetworksFeaturesStrengthCalculation",
+      "applicability": "Только линейные (газ)"
+    },
+    {
+      "section": "Газораспределительные сети",
+      "subsection": "Охрана окружающей среды",
+      "label": "Сведения об охране окружающей среды при строительстве газовой сети",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/GasNetworksFeatures/EnvironmentalProtection",
+      "xpath_xsl_anchor": "GasNetworksFeaturesEnvironmentalProtection",
+      "applicability": "Только линейные (газ)"
+    },
+    {
+      "section": "Газораспределительные сети",
+      "subsection": "Пожарная безопасность",
+      "label": "Сведения о пожарной безопасности газовой сети",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/GasNetworksFeatures/FireSafety",
+      "xpath_xsl_anchor": "GasNetworksFeaturesFireSafety",
+      "applicability": "Только линейные (газ)"
+    },
+    {
+      "section": "Газораспределительные сети",
+      "subsection": "Эксплуатационная безопасность",
+      "label": "Сведения об обеспечении эксплуатационной безопасности газовой сети",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/GasNetworksFeatures/OperationalSafety",
+      "xpath_xsl_anchor": "GasNetworksFeaturesOperationalSafety",
+      "applicability": "Только линейные (газ)"
+    },
+    {
+      "section": "Газораспределительные сети",
+      "subsection": "Периодичность ремонта",
+      "label": "Периодичность ремонта и технического обслуживания газовой сети",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/GasNetworksFeatures/RepairFrequency",
+      "xpath_xsl_anchor": "GasNetworksFeaturesPerairFrequency",
+      "applicability": "Только линейные (газ)"
+    },
+    {
+      "section": "Состав ПД — нелин.",
+      "subsection": "Раздел 1 — Пояснительная записка",
+      "label": "Раздел 1 «Пояснительная записка» состава ПД нелинейного объекта",
+      "xpath_xsd": "/ExplanatoryNote/NonIndustrialObject/ProjectDocumentation/Section1",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Состав ПД — нелин.",
+      "subsection": "Раздел 2 — Схема планировочной организации",
+      "label": "Раздел 2 «Схема планировочной организации земельного участка»",
+      "xpath_xsd": "/ExplanatoryNote/NonIndustrialObject/ProjectDocumentation/Section2",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Состав ПД — нелин.",
+      "subsection": "Раздел 3 — Архитектурные решения",
+      "label": "Раздел 3 «Архитектурные решения»",
+      "xpath_xsd": "/ExplanatoryNote/NonIndustrialObject/ProjectDocumentation/Section3",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Состав ПД — нелин.",
+      "subsection": "Раздел 4 — Конструктивные и объёмно-планировочные решения",
+      "label": "Раздел 4 «Конструктивные и объёмно-планировочные решения»",
+      "xpath_xsd": "/ExplanatoryNote/NonIndustrialObject/ProjectDocumentation/Section4",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Состав ПД — нелин.",
+      "subsection": "Раздел 5 — Сведения об инженерном оборудовании",
+      "label": "Раздел 5 «Сведения об инженерном оборудовании, сетях инженерно-технического обеспечения»",
+      "xpath_xsd": "/ExplanatoryNote/NonIndustrialObject/ProjectDocumentation/Section5",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Состав ПД — нелин.",
+      "subsection": "Раздел 6 — Проект организации строительства",
+      "label": "Раздел 6 «Проект организации строительства»",
+      "xpath_xsd": "/ExplanatoryNote/NonIndustrialObject/ProjectDocumentation/Section6",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Состав ПД — нелин.",
+      "subsection": "Раздел 7 — Проект организации сноса",
+      "label": "Раздел 7 «Проект организации работ по сносу»",
+      "xpath_xsd": "/ExplanatoryNote/NonIndustrialObject/ProjectDocumentation/Section7",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Состав ПД — нелин.",
+      "subsection": "Раздел 8 — Перечень мероприятий по охране ОС",
+      "label": "Раздел 8 «Перечень мероприятий по охране окружающей среды»",
+      "xpath_xsd": "/ExplanatoryNote/NonIndustrialObject/ProjectDocumentation/Section8",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Состав ПД — нелин.",
+      "subsection": "Раздел 9 — Мероприятия по ОБП",
+      "label": "Раздел 9 «Мероприятия по обеспечению пожарной безопасности»",
+      "xpath_xsd": "/ExplanatoryNote/NonIndustrialObject/ProjectDocumentation/Section9",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Состав ПД — нелин.",
+      "subsection": "Раздел 10 — Доступность для МГН",
+      "label": "Раздел 10 «Мероприятия по обеспечению доступа инвалидов»",
+      "xpath_xsd": "/ExplanatoryNote/NonIndustrialObject/ProjectDocumentation/Section10",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Состав ПД — нелин.",
+      "subsection": "Раздел 11 — Смета",
+      "label": "Раздел 11 «Смета на строительство»",
+      "xpath_xsd": "/ExplanatoryNote/NonIndustrialObject/ProjectDocumentation/Section11",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Состав ПД — нелин.",
+      "subsection": "Раздел 12 — Сметная документация",
+      "label": "Раздел 12 «Сметная документация»",
+      "xpath_xsd": "/ExplanatoryNote/NonIndustrialObject/ProjectDocumentation/Section12",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Состав ПД — нелин.",
+      "subsection": "Раздел 13 — Иная документация",
+      "label": "Раздел 13 «Иная документация, предусмотренная законодательством»",
+      "xpath_xsd": "/ExplanatoryNote/NonIndustrialObject/ProjectDocumentation/Section13",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только пр/нп"
+    },
+    {
+      "section": "Состав ПД — лин.",
+      "subsection": "Раздел 1 — Пояснительная записка",
+      "label": "Раздел 1 «Пояснительная записка» состава ПД линейного объекта",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/ProjectDocumentation/Section1",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Состав ПД — лин.",
+      "subsection": "Раздел 2 — Проект полосы отвода",
+      "label": "Раздел 2 «Проект полосы отвода»",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/ProjectDocumentation/Section2",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Состав ПД — лин.",
+      "subsection": "Раздел 3 — Технологические и конструктивные решения",
+      "label": "Раздел 3 «Технологические и конструктивные решения линейного объекта»",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/ProjectDocumentation/Section3",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Состав ПД — лин.",
+      "subsection": "Раздел 4 — Здания, строения и сооружения",
+      "label": "Раздел 4 «Здания, строения и сооружения, входящие в инфраструктуру»",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/ProjectDocumentation/Section4",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Состав ПД — лин.",
+      "subsection": "Раздел 5 — Проект организации строительства",
+      "label": "Раздел 5 «Проект организации строительства» линейного объекта",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/ProjectDocumentation/Section5",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Состав ПД — лин.",
+      "subsection": "Раздел 6 — Проект организации сноса",
+      "label": "Раздел 6 «Проект организации работ по сносу»",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/ProjectDocumentation/Section6",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Состав ПД — лин.",
+      "subsection": "Раздел 7 — Мероприятия по охране ОС",
+      "label": "Раздел 7 «Мероприятия по охране окружающей среды»",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/ProjectDocumentation/Section7",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Состав ПД — лин.",
+      "subsection": "Раздел 8 — Мероприятия по ОБП",
+      "label": "Раздел 8 «Мероприятия по обеспечению пожарной безопасности»",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/ProjectDocumentation/Section8",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Состав ПД — лин.",
+      "subsection": "Раздел 9 — Сметная документация",
+      "label": "Раздел 9 «Сметная документация» линейного объекта",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/ProjectDocumentation/Section9",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Состав ПД — лин.",
+      "subsection": "Раздел 10 — Иная документация",
+      "label": "Раздел 10 «Иная документация» линейного объекта",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/ProjectDocumentation/Section10",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только линейные"
+    },
+    {
+      "section": "Состав ПД — лин. (газ)",
+      "subsection": "Раздел 1 — Пояснительная записка (газ)",
+      "label": "Раздел 1 ПЗ состава ПД линейного объекта газовых сетей",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/GasProjectDocumentation/Section1",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только линейные (газ)"
+    },
+    {
+      "section": "Состав ПД — лин. (газ)",
+      "subsection": "Раздел 2 — Технологические решения (газ)",
+      "label": "Раздел 2 «Технологические решения» газовой линейной сети",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/GasProjectDocumentation/Section2",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только линейные (газ)"
+    },
+    {
+      "section": "Состав ПД — лин. (газ)",
+      "subsection": "Раздел 3 — Конструктивные решения (газ)",
+      "label": "Раздел 3 «Конструктивные решения» газовой линейной сети",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/GasProjectDocumentation/Section3",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только линейные (газ)"
+    },
+    {
+      "section": "Состав ПД — лин. (газ)",
+      "subsection": "Раздел 4 — Проект организации строительства (газ)",
+      "label": "Раздел 4 «ПОС» газовой линейной сети",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/GasProjectDocumentation/Section4",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только линейные (газ)"
+    },
+    {
+      "section": "Состав ПД — лин. (газ)",
+      "subsection": "Раздел 5 — Охрана ОС (газ)",
+      "label": "Раздел 5 «Охрана окружающей среды» газовой линейной сети",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/GasProjectDocumentation/Section5",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только линейные (газ)"
+    },
+    {
+      "section": "Состав ПД — лин. (газ)",
+      "subsection": "Раздел 6 — Пожарная безопасность (газ)",
+      "label": "Раздел 6 «Пожарная безопасность» газовой линейной сети",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/GasProjectDocumentation/Section6",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только линейные (газ)"
+    },
+    {
+      "section": "Состав ПД — лин. (газ)",
+      "subsection": "Раздел 7 — Иная документация (газ)",
+      "label": "Раздел 7 «Иная документация» газовой линейной сети",
+      "xpath_xsd": "/ExplanatoryNote/LinearObject/GasProjectDocumentation/Section7",
+      "xpath_xsl_anchor": "ProjectDocumentationContent",
+      "applicability": "Только линейные (газ)"
+    },
+    {
+      "section": "Информационная модель",
+      "subsection": "Состав 3D-модели",
+      "label": "Сведения о составе 3D-модели объекта",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/Model",
+      "xpath_xsl_anchor": "Model",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Информационная модель",
+      "subsection": "Тип файла модели",
+      "label": "Тип файла 3D-модели (IFC / LandXML / XML)",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/Model/Type",
+      "xpath_xsl_anchor": "Model",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Информационная модель",
+      "subsection": "Имя файла модели",
+      "label": "Имя файла 3D-модели объекта",
+      "xpath_xsd": "/ExplanatoryNote/{ТипОбъекта}/Model/File/FileName",
+      "xpath_xsl_anchor": "Model",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Заверение проектной организации",
+      "subsection": "Заверение",
+      "label": "Заверение проектной организации (тип tTextBlock, обязательное)",
+      "xpath_xsd": "/ExplanatoryNote/DesignerAssurance",
+      "xpath_xsl_anchor": "DesignerAssurance",
+      "applicability": "Все типы"
+    },
+    {
+      "section": "Заверение проектной организации",
+      "subsection": "Дополнительные произвольные описания",
+      "label": "Дополнительное произвольное текстовое описание (DesignerNote, необязательное)",
+      "xpath_xsd": "/ExplanatoryNote/DesignerNote",
+      "xpath_xsl_anchor": "DesignerAssurance",
+      "applicability": "Все типы"
+    }
+  ]
+}

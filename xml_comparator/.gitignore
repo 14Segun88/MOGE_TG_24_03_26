@@ -1,0 +1,32 @@
+# Виртуальное окружение Python
+.venv/
+venv/
+env/
+
+# Байткод Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.py[cod]
+
+# Среда разработки
+.vscode/
+.idea/
+.claude/
+*.swp
+*.swo
+.DS_Store
+
+# Переменные окружения (секреты)
+.env
+.env.*
+!.env.example
+
+# Сгенерированные отчёты (результаты запусков)
+report_output.*
+pz.xml
+
+# Тесты и справочные материалы (не нужны для деплоя)
+tests/
+xsd and xsl/

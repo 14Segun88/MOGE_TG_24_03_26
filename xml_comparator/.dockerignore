@@ -1,0 +1,44 @@
+# Виртуальное окружение Python
+.venv/
+venv/
+env/
+
+# Кеш Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Среда разработки
+.vscode/
+.idea/
+.claude/
+*.swp
+*.swo
+.DS_Store
+
+# Тестовые артефакты и справочные материалы
+tests/
+*.json
+!mapping_PZ_ZnP.json
+!mapping_PZ_xsd_xsl.json
+
+# Сгенерированные отчёты
+report_output.*
+pz.xml
+
+# Документация и вспомогательные файлы
+ARCHITECTURE.md
+README.md
+*.bat
+
+# Переменные окружения (секреты)
+.env
+.env.*
+!.env.example
+
+# Git
+.git/
+.gitignore
+.gitattributes
