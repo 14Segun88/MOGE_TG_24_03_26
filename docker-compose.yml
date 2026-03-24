@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  weaviate:
+    image: cr.weaviate.io/semitechnologies/weaviate:1.25.4
+    container_name: moexp_weaviate
+    ports:
+      - "8080:8080"
+      - "50051:50051"    # gRPC (для быстрых batch-запросов)
+    restart: unless-stopped
+    environment:
+      # Встроенный векторизатор — text2vec-transformers НЕ нужен,
+      # мы передаём готовые векторы из sentence-transformers локально
+      QUERY_DEFAULTS_LIMIT: 25
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
+      PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
+      DEFAULT_VECTORIZER_MODULE: 'none'
+      ENABLE_MODULES: 'text2vec-openai,generative-openai'
+      # BM25 — гибридный поиск (русскоязычный стеммер)
+      MODULES_CLIENT_TIMEOUT: 60s
+      # Производительность (подстраиваем под RAM)
+      LIMIT_RESOURCES: 'false'
+      LOG_LEVEL: 'warning'
+    volumes:
+      - weaviate_data:/var/lib/weaviate
+    mem_limit: 2g        # до 2 ГБ RAM на контейнер
+    mem_reservation: 512m
+
+volumes:
+  weaviate_data:
+    driver: local
