@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>МособлГосЭкспертиза — DocumentAnalyzer v2.0</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --bg-card: #1c2333;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            --accent-blue: #58a6ff;
+            --accent-green: #3fb950;
+            --accent-red: #f85149;
+            --accent-yellow: #d29922;
+            --accent-purple: #bc8cff;
+            --accent-orange: #f0883e;
+            --border: #30363d;
+            --msg-user: #1f3a5f;
+            --msg-system: #1c2333;
+            --scrollbar-bg: #161b22;
+            --scrollbar-thumb: #30363d;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* ── Header ─────────────────────────── */
+        .header {
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-shrink: 0;
+        }
+        .header-logo {
+            width: 42px; height: 42px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .header-info h1 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .header-info span {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        .header-status {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--accent-green);
+        }
+        .header-status .dot {
+            width: 8px; height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* ── Chat Area ─────────────────────── */
+        .chat-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            scroll-behavior: smooth;
+        }
+        .chat-area::-webkit-scrollbar { width: 6px; }
+        .chat-area::-webkit-scrollbar-track { background: var(--scrollbar-bg); }
+        .chat-area::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 3px;
+        }
+
+        /* ── Messages ─────────────────────── */
+        .msg {
+            max-width: 85%;
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 14px;
+            line-height: 1.55;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            animation: fadeIn 0.2s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .msg-user {
+            background: linear-gradient(135deg, #1a3a5c, #1f4068);
+            border: 1px solid #264a70;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+            color: #c9d6e3;
+        }
+        .msg-system {
+            background: var(--msg-system);
+            border: 1px solid var(--border);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        .msg-timestamp {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            text-align: right;
+        }
+        .msg-system .msg-timestamp { text-align: left; }
+
+        /* Status messages */
+        .msg-status {
+            background: transparent;
+            border: none;
+            align-self: center;
+            font-size: 12px;
+            color: var(--text-secondary);
+            padding: 4px 12px;
+        }
+
+        /* ── Code & highlights inside messages ── */
+        .msg code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(110,118,129,0.2);
+            padding: 1px 5px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        /* ── Typing indicator ────────────── */
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            padding: 10px 18px;
+            background: var(--msg-system);
+            border: 1px solid var(--border);
+            border-radius: 16px 16px 16px 4px;
+        }
+        .typing-indicator.active { display: flex; gap: 4px; }
+        .typing-indicator span {
+            width: 7px; height: 7px;
+            background: var(--text-secondary);
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out;
+        }
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        /* ── Input Area ──────────────────── */
+        .input-area {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 12px 24px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+            flex-shrink: 0;
+        }
+        .input-area textarea {
+            flex: 1;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 10px 16px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            resize: none;
+            outline: none;
+            max-height: 120px;
+            min-height: 42px;
+            line-height: 1.4;
+            transition: border-color 0.2s;
+        }
+        .input-area textarea:focus {
+            border-color: var(--accent-blue);
+        }
+        .input-area textarea::placeholder {
+            color: var(--text-muted);
+        }
+        .btn-send {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border: none;
+            border-radius: 12px;
+            width: 42px; height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.15s, opacity 0.15s;
+            flex-shrink: 0;
+        }
+        .btn-send:hover { transform: scale(1.05); }
+        .btn-send:active { transform: scale(0.95); }
+        .btn-send:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+        .btn-send svg {
+            width: 20px; height: 20px;
+            fill: white;
+        }
+
+        /* ── Quick commands bar ─────────── */
+        .quick-cmds {
+            display: flex;
+            gap: 6px;
+            padding: 6px 24px;
+            background: var(--bg-secondary);
+            overflow-x: auto;
+            flex-shrink: 0;
+        }
+        .quick-cmds button {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 5px 12px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            white-space: nowrap;
+            font-family: 'JetBrains Mono', monospace;
+            transition: background 0.15s, color 0.15s;
+        }
+        .quick-cmds button:hover {
+            background: var(--accent-blue);
+            color: white;
+            border-color: var(--accent-blue);
+        }
+
+        /* ── Attach button ────────────── */
+        .btn-attach {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            width: 42px; height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.15s, border-color 0.15s;
+            flex-shrink: 0;
+            font-size: 18px;
+        }
+        .btn-attach:hover {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+
+        /* ── Drag overlay ─────────────── */
+        .drag-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(88,166,255,0.15);
+            border: 3px dashed var(--accent-blue);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+        .drag-overlay.active { display: flex; }
+        .drag-overlay-text {
+            background: var(--bg-card);
+            padding: 20px 40px;
+            border-radius: 16px;
+            font-size: 18px;
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        /* ── Run analysis button in chat ── */
+        .btn-run-analysis {
+            background: linear-gradient(135deg, var(--accent-green), #2ea043);
+            border: none;
+            border-radius: 10px;
+            padding: 8px 20px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: transform 0.15s;
+        }
+        .btn-run-analysis:hover { transform: scale(1.03); }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-logo">🏛</div>
+        <div class="header-info">
+            <h1>МособлГосЭкспертиза</h1>
+            <span>DocumentAnalyzer v2.0</span>
+        </div>
+        <div class="header-status">
+            <span class="dot"></span>
+            <span id="connection-status">Подключение...</span>
+        </div>
+    </div>
+
+    <!-- Chat -->
+    <div class="chat-area" id="chat"></div>
+
+    <!-- Typing indicator -->
+    <div class="typing-indicator" id="typing">
+        <span></span><span></span><span></span>
+    </div>
+
+    <!-- Quick command buttons -->
+    <div class="quick-cmds">
+        <button onclick="sendQuick('/basket')">/basket</button>
+        <button onclick="sendQuick('/status')">/status</button>
+        <button onclick="sendQuick('/help')">/help</button>
+        <button onclick="sendQuick('/search ')">/search</button>
+        <button onclick="sendQuick('/debug')">/debug</button>
+    </div>
+
+    <!-- Drag overlay -->
+    <div class="drag-overlay" id="drag-overlay">
+        <div class="drag-overlay-text">📦 Перетащите файлы сюда</div>
+    </div>
+
+    <!-- Hidden file input -->
+    <input type="file" id="file-input" multiple accept=".zip,.xml,.pdf,.sig,.doc,.docx,.xls,.xlsx,.dwg,.ifc" style="display:none">
+
+    <!-- Input -->
+    <div class="input-area">
+        <button class="btn-attach" onclick="document.getElementById('file-input').click()" title="Прикрепить файлы (ZIP, XML, PDF...)">📎</button>
+        <textarea id="input" rows="1" placeholder="Введите команду или перетащите файлы..." autofocus></textarea>
+        <button class="btn-send" id="btn-send" onclick="sendMessage()">
+            <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        </button>
+    </div>
+
+    <script>
+        const chat = document.getElementById('chat');
+        const input = document.getElementById('input');
+        const typing = document.getElementById('typing');
+        const connStatus = document.getElementById('connection-status');
+        let ws = null;
+        let sessionId = null;  // Получаем от сервера через WS
+
+        function timestamp() {
+            const d = new Date();
+            return d.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function addMessage(text, type = 'system') {
+            const msg = document.createElement('div');
+            msg.className = `msg msg-${type}`;
+
+            // Replace HTML-safe formatting for system messages
+            let content = text;
+            if (type === 'system') {
+                // Keep emoji and formatting, but make it safe
+                content = escapeHtml(content);
+            }
+
+            const ts = document.createElement('div');
+            ts.className = 'msg-timestamp';
+            ts.textContent = timestamp();
+
+            msg.innerHTML = `<div>${content}</div>`;
+            msg.appendChild(ts);
+
+            chat.appendChild(msg);
+            chat.scrollTop = chat.scrollHeight;
+            return msg;
+        }
+
+        function showTyping(show) {
+            typing.classList.toggle('active', show);
+            if (show) chat.scrollTop = chat.scrollHeight;
+        }
+
+        function sendMessage() {
+            const text = input.value.trim();
+            if (!text) return;
+
+            addMessage(text, 'user');
+            input.value = '';
+            input.style.height = 'auto';
+
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(text);
+                showTyping(true);
+            } else {
+                addMessage('❌ Нет подключения к серверу. Перезагрузите страницу.', 'system');
+            }
+        }
+
+        function sendQuick(cmd) {
+            input.value = cmd;
+            input.focus();
+            if (cmd.endsWith(' ')) return; // needs argument
+            sendMessage();
+        }
+
+        // Auto-resize textarea
+        input.addEventListener('input', () => {
+            input.style.height = 'auto';
+            input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+        });
+
+        // Enter to send, Shift+Enter for newline
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // ── WebSocket Connection ──────────────
+        function connect() {
+            const proto = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            ws = new WebSocket(`${proto}//${location.host}/ws`);
+
+            ws.onopen = () => {
+                connStatus.textContent = 'Онлайн';
+                document.querySelector('.dot').style.background = 'var(--accent-green)';
+            };
+
+            ws.onmessage = (event) => {
+                const data = event.data;
+
+                // Перехватываем session_id от сервера (не показываем в чате)
+                if (data.startsWith('__SESSION__')) {
+                    sessionId = data.replace('__SESSION__', '');
+                    return;
+                }
+
+                showTyping(false);
+
+                // Handle multi-message responses (server sends separate messages)
+                addMessage(data, 'system');
+            };
+
+            ws.onclose = () => {
+                connStatus.textContent = 'Отключён';
+                document.querySelector('.dot').style.background = 'var(--accent-red)';
+                // Reconnect after 3s
+                setTimeout(connect, 3000);
+            };
+
+            ws.onerror = () => {
+                connStatus.textContent = 'Ошибка';
+                document.querySelector('.dot').style.background = 'var(--accent-red)';
+            };
+        }
+
+        connect();
+
+        // ── File Upload ────────────────────────
+        const fileInput = document.getElementById('file-input');
+        const dragOverlay = document.getElementById('drag-overlay');
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                uploadFiles(e.target.files);
+                e.target.value = ''; // reset for re-upload
+            }
+        });
+
+        // Drag and drop
+        let dragCounter = 0;
+        document.addEventListener('dragenter', (e) => {
+            e.preventDefault();
+            dragCounter++;
+            dragOverlay.classList.add('active');
+        });
+        document.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            dragCounter--;
+            if (dragCounter <= 0) {
+                dragCounter = 0;
+                dragOverlay.classList.remove('active');
+            }
+        });
+        document.addEventListener('dragover', (e) => e.preventDefault());
+        document.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dragCounter = 0;
+            dragOverlay.classList.remove('active');
+            if (e.dataTransfer.files.length > 0) {
+                uploadFiles(e.dataTransfer.files);
+            }
+        });
+
+        async function uploadFiles(fileList) {
+            const files = Array.from(fileList);
+            const names = files.map(f => f.name).join(', ');
+            addMessage(`📎 Загружаю: ${names}`, 'user');
+            showTyping(true);
+
+            const formData = new FormData();
+            for (const f of files) {
+                formData.append('files', f);
+            }
+
+            try {
+                const resp = await fetch(`/upload?session_id=${sessionId || ''}`, {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await resp.json();
+                showTyping(false);
+
+                // Show server messages
+                for (const msg of result.messages) {
+                    addMessage(msg, 'system');
+                }
+
+                // If files added to basket (not ZIP), show run button
+                if (result.action === 'basket') {
+                    const btnDiv = document.createElement('div');
+                    btnDiv.style.textAlign = 'center';
+                    btnDiv.innerHTML = '<button class="btn-run-analysis" onclick="sendQuick(\'/run\')">🚀 Запустить проверку пакета</button>';
+                    chat.appendChild(btnDiv);
+                    chat.scrollTop = chat.scrollHeight;
+                }
+
+                // If ZIP was auto-analyzed, results come via WebSocket
+                if (result.action === 'analyze') {
+                    showTyping(true);
+                }
+
+            } catch (err) {
+                showTyping(false);
+                addMessage(`❌ Ошибка загрузки: ${err.message}`, 'system');
+            }
+        }
+    </script>
+</body>
+</html>
