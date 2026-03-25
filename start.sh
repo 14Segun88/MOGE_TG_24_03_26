@@ -6,6 +6,9 @@
 # ─────────────────────────────────────────────
 cd "$(dirname "$0")"
 
+# Читаем порт из .env (или дефолт 8001)
+WEB_PORT=$(grep -oP '^WEB_PORT=\K.*' .env 2>/dev/null || echo "8001")
+
 TEST_MODE=false
 BOT_LOG="logs/bot_$(date +%Y%m%d_%H%M%S).log"
 mkdir -p logs
@@ -68,25 +71,25 @@ if [ -f "test_monitor.sh" ]; then
 fi
 
 echo ""
-echo "🚀 Запускаем бота..."
-echo "   Для режима разработчика: напиши /debug в Telegram"
+echo "🚀 Запускаем веб-интерфейс..."
+echo "   Откройте: http://localhost:$WEB_PORT"
+echo "   Debug-режим: /debug в чате"
 echo "   Остановить: Ctrl+C"
-echo "   Лог бота: $BOT_LOG"
+echo "   Лог: $BOT_LOG"
 echo "─────────────────────────────────────────────"
 
 # Корректное завершение: останавливаем монитор при Ctrl+C
 cleanup() {
     echo ""
-    echo "🛑 Останавливаем бота..."
+    echo "🛑 Останавливаем сервер..."
     [ -n "$MONITOR_PID" ]  && kill "$MONITOR_PID"  2>/dev/null && wait "$MONITOR_PID"  2>/dev/null
     [ -n "$COMPARE_PID" ] && kill "$COMPARE_PID" 2>/dev/null && wait "$COMPARE_PID" 2>/dev/null
     exit 0
 }
 trap cleanup SIGINT SIGTERM
 
-# Бот пишет в terminal И в лог-файл через tee
-.venv/bin/python bot.py 2>&1 | tee "$BOT_LOG"
+# Web-сервер пишет в terminal И в лог-файл через tee
+.venv/bin/python web_app.py 2>&1 | tee "$BOT_LOG"
 
-# Если бот упал сам — тоже чистимся
+# Если сервер упал сам — тоже чистимся
 cleanup
-

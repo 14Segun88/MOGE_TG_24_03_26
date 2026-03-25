@@ -1,0 +1,12 @@
+2026-03-25 11:57:38,072 [INFO] 🚀 RAG Crawler | 30 документов | отделы: {'kap', 'ito', 'gochs'}
+RAG Quality Crawl:   0%|          | 0/30 [00:00<?, ?it/s]2026-03-25 11:57:40,075 [INFO] 🌐 Загрузка (FZ-384): https://docs.cntd.ru/document/902192610
+2026-03-25 11:59:36,997 [ERROR] ❌ Ошибка Playwright на FZ-384 (https://docs.cntd.ru/document/902192610): Page.goto: Timeout 120000ms exceeded.
+Call log:
+  - navigating to "https://docs.cntd.ru/document/902192610", waiting until "networkidle"
+
+RAG Quality Crawl:   3%|▎         | 1/30 [01:57<56:37, 117.16s/it]2026-03-25 11:59:37,075 [INFO] 🌐 Загрузка (FZ-181): https://docs.cntd.ru/document/9014511
+2026-03-25 11:59:50,596 [ERROR] ❌ Ошибка Playwright на FZ-181 (https://docs.cntd.ru/document/9014511): Page.goto: net::ERR_CONNECTION_TIMED_OUT at https://docs.cntd.ru/document/9014511
+Call log:
+  - navigating to "https://docs.cntd.ru/document/9014511", waiting until "networkidle"
+
+RAG Quality Crawl:   7%|▋         | 2/30 [02:10<26:14, 56.24s/it] 2026-03-25 11:59:50,650 [INFO] 🌐 Загрузка (PP-87): https://docs.cntd.ru/document/902087949

@@ -68,7 +68,7 @@ def ask_project(question: str, project_id: str):
     try:
         # Вызываем Llama-3.3-70b через Groq
         response = call_llm(
-            model="gpt-oss-120b",
+            model="llama-3.3-70b-versatile",
             system_prompt=system_prompt,
             user_prompt=user_prompt,
             temperature=0.1
