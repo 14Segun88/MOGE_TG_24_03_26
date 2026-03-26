@@ -400,7 +400,7 @@ async def _run_pipeline(task_id: UUID, zip_bytes: bytes) -> AnalysisResultOut:
                 log.warning("PP963: Кросс-валидация ТЭП заблокирована — XML ПЗ отсутствует (FC-001 critical). Нет эталонного источника данных.")
                 pp963_out = PP963ReportOut(
                     llm_model="blocked",
-                    tep_compliant=None,
+                    tep_compliant=False,
                     tep_discrepancies=["⛔ Кросс-валидация ТЭП невозможна: XML Пояснительная записка не найдена. Нет машиночитаемого эталона для сравнения (FC-001)."],
                 )
             else:

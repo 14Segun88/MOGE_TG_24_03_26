@@ -41,3 +41,5 @@ Thumbs.db
 
 # ── Gemini (агент) ───────────────────────────
 .gemini/
+.venv/
+__pycache__/

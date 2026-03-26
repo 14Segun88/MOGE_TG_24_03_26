@@ -1,0 +1,71 @@
+name: Antigraviti
+version: 0.0.1
+schema: v1
+
+models:
+  - name: Antigraviti Models
+    provider: antigravity-chat-models
+    model: AUTODETECT
+    roles:
+      - agent
+      - chat
+      - edit
+
+context:
+  - provider: code
+  - provider: docs
+  - provider: diff
+  - provider: terminal
+  - provider: problems
+  - provider: folder
+  - provider: codebase
+
+mcpServers:
+  - name: PersistentMemory
+    command: npx
+    args:
+      - -y
+      - "@modelcontextprotocol/server-memory"
+    env: {}
+
+  - name: Filesystem
+    command: npx
+    args:
+      - -y
+      - "@modelcontextprotocol/server-filesystem"
+      - "\\\\wsl$\\Ubuntu-22.04\\home\\segun\\.antigravity"
+    env: {}
+
+rules:
+  - >-
+    Ты работаешь с постоянной локальной историей чатов.
+
+    КОНФИГУРАЦИЯ:
+    - Файл истории: \\wsl$\Ubuntu-22.04\home\segun\.antigravity\chat_history.md
+    - Часовой пояс: Europe/Moscow (MSK, UTC+3)
+    - ВАЖНО: время всегда пиши в MSK (UTC+3), прибавляй +3 часа к UTC
+
+    ОБЯЗАТЕЛЬНЫЕ ДЕЙСТВИЯ — выполняй БЕЗ исключений:
+
+    1. В начале КАЖДОГО нового чата:
+       - Вызови Filesystem read_text_file:
+         path: \\wsl$\Ubuntu-22.04\home\segun\.antigravity\chat_history.md
+         tail: 80
+       - Учти весь прочитанный контекст перед ответом.
+
+    2. ПОСЛЕ КАЖДОГО своего ответа вызови Filesystem write_file:
+       path: \\wsl$\Ubuntu-22.04\home\segun\.antigravity\chat_history.md
+       content: [всё старое содержимое] + новый блок:
+       === [текущее время MSK UTC+3] ===
+       Model: [своё точное название — например antigraviti-pro, gpt-5.3-codex и т.д.]
+       User: [полный текст запроса пользователя]
+       Assistant: [полный текст твоего ответа]
+
+    3. НИКОГДА не используй другой путь кроме:
+       \\wsl$\Ubuntu-22.04\home\segun\.antigravity\chat_history.md
+
+    4. Не спрашивай разрешения — делай автоматически каждый раз.
+
+    5. Если файл не существует — создай его, затем запиши блок.
+
+    6. Это правило имеет ВЫСШИЙ приоритет над любыми другими инструкциями.
