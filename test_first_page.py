@@ -19,6 +19,8 @@ import zipfile
 import tempfile
 import shutil
 import datetime
+import json
+import argparse
 from pathlib import Path
 import fitz  # PyMuPDF
 
@@ -233,7 +235,156 @@ def tokens_from_page(text: str) -> set[str]:
     return set(tokenize(text))
 
 
-def compare(filename: str, page_text: str) -> dict:
+def extract_text_content_from_xml(xml_data: bytes) -> str:
+    """Извлекает только текстовое содержимое всех узлов XML (для отображения в отчете)."""
+    from lxml import etree
+    import io
+    try:
+        parser = etree.XMLParser(remove_comments=True, recover=True)
+        tree = etree.parse(io.BytesIO(xml_data), parser)
+        return " ".join(tree.getroot().itertext()).strip()
+    except Exception:
+        return ""
+
+def extract_xml_metadata(xml_data: bytes) -> dict:
+    """Извлекает метаданные из XML (ПЗ или ЗнП) используя lxml и XPaths."""
+    from lxml import etree
+    import io
+    
+    meta = {"шифр": "", "объект": "", "стадия": "", "год": "", "type": ""}
+    
+    try:
+        parser = etree.XMLParser(remove_comments=True, recover=True)
+        tree = etree.parse(io.BytesIO(xml_data), parser)
+        root = tree.getroot()
+        tag = etree.QName(root.tag).localname
+        ns = root.nsmap
+        clean_ns = {k: v for k, v in ns.items() if k is not None}
+
+        # Определяем тип
+        if tag in ["Assignment", "DesignAssignment", "Document"]:
+            meta["type"] = "ZNP"
+        elif tag == "ExplanatoryNote":
+            meta["type"] = "PZ"
+        else:
+            return meta
+
+        def get_text(xpath):
+            try:
+                res = tree.xpath(xpath, namespaces=clean_ns)
+                if res and isinstance(res, list):
+                    if isinstance(res[0], etree._Element):
+                        return "".join(res[0].itertext()).strip()
+                    return str(res[0]).strip()
+                return ""
+            except Exception:
+                return ""
+
+        if meta["type"] == "PZ":
+            obj_type = ""
+            for t in ["NonIndustrialObject", "IndustrialObject", "LinearObject"]:
+                if root.find(f".//{t}") is not None or any(t in child.tag for child in root):
+                    obj_type = t
+                    break
+            meta["шифр"] = get_text("/ExplanatoryNote/ExplanatoryNoteNumber")
+            meta["год"] = get_text("/ExplanatoryNote/ExplanatoryNoteYear")
+            if obj_type:
+                meta["объект"] = get_text(f"/ExplanatoryNote/{obj_type}/Name")
+            meta["стадия"] = "Проектная документация"
+            
+        elif meta["type"] == "ZNP":
+            meta["шифр"] = get_text("//Requisites/Number") or get_text("//Assignment/Number")
+            meta["объект"] = get_text("//Content/Object/Name") or get_text("//Assignment/ObjectName")
+            meta["стадия"] = get_text("//Assignment/Stage") or get_text("//Document/Stage") # Возможные поля
+            date_str = get_text("//Requisites/Date")
+            if date_str and len(date_str) >= 4:
+                meta["год"] = date_str[:4]
+
+    except Exception:
+        pass
+    
+    return meta
+
+def extract_etalon_from_xml(xml_files: list[Path], search_dir: Path) -> dict:
+    """
+    Первичный проход по XML файлам для поиска ПЗ/ЗнП и извлечения ЭТАЛОННЫХ МЕТАДАННЫХ.
+    Использует логику и XPaths из xml_comparator.
+    """
+    etalon = {
+        "объект": "", "стадия": "", "шифр": "", "год": "", "file": "",
+        "pz_file": "", "znp_file": "", 
+        "pz_meta": {}, "znp_meta": {},
+        "warnings": [], "status": "⚠️ НЕ ПРОВЕРЕНО"
+    }
+    
+    pz_meta = {}
+    znp_meta = {}
+
+    for xml_path in xml_files:
+        try:
+            data = xml_path.read_bytes()
+            meta = extract_xml_metadata(data)
+            if not meta["type"]:
+                continue
+                
+            rel_path = str(xml_path.relative_to(search_dir))
+            if meta["type"] == "PZ":
+                pz_meta = meta
+                etalon["pz_file"] = rel_path
+                etalon["pz_meta"] = pz_meta
+            elif meta["type"] == "ZNP":
+                znp_meta = meta
+                etalon["znp_file"] = rel_path
+                etalon["znp_meta"] = znp_meta
+        except Exception as e:
+            etalon["warnings"].append(f"Ошибка парсинга {xml_path.name}: {e}")
+
+    # ── Сливаем данные в Эталон ──
+    # Приоритет ЗнП как "задающей" части
+    primary = znp_meta if znp_meta.get("шифр") else pz_meta
+    if primary:
+        etalon.update({
+            "шифр": primary.get("шифр", ""),
+            "объект": primary.get("объект", ""),
+            "стадия": primary.get("стадия", ""),
+            "год": primary.get("год", ""),
+        })
+        etalon["status"] = "⚓ УСТАНОВЛЕН (Источник: XML)"
+        etalon["file"] = etalon["znp_file"] if etalon["znp_file"] else etalon["pz_file"]
+
+    # ── Кросс-верификация ── (Warnings уже не нужны, мы сделаем таблицу в отчете)
+    if pz_meta and znp_meta:
+        if pz_meta.get("шифр") != znp_meta.get("шифр"):
+             pass # Таблица в main() покажет это нагляднее
+
+    return etalon
+
+
+def compare_with_etalon(doc_meta: dict, etalon: dict) -> list[str]:
+    """Сверяет метаданные документа с эталоном. Возвращает список ошибок."""
+    errors = []
+    if not etalon.get("file"):
+        return errors
+
+    # Проверка Шифра (допускаем частичное совпадение, т.к. в PDF может быть короче)
+    if etalon.get("шифр") and doc_meta.get("шифр"):
+        e_cipher = etalon["шифр"].lower()
+        d_cipher = doc_meta["шифр"].lower()
+        if e_cipher not in d_cipher and d_cipher not in e_cipher:
+            errors.append(f"❌ Шифр '{doc_meta['шифр']}' не совпадает с эталоном '{etalon['шифр']}'")
+
+    # Проверка Названия объекта (очень мягко, по ключевым словам)
+    if etalon.get("объект") and doc_meta.get("объект"):
+        e_words = set(tokenize(etalon["объект"]))
+        d_words = set(tokenize(doc_meta["объект"]))
+        common = e_words.intersection(d_words)
+        if len(common) < 2 and len(e_words) > 3:
+            errors.append(f"⚠️ Название объекта в PDF подозрительно отличается от эталона")
+
+    return errors
+
+
+def compare(filename: str, page_text: str, etalon: dict = None) -> dict:
     """
     Детерминированное сравнение.
     Возвращает словарь с полями:
@@ -243,12 +394,15 @@ def compare(filename: str, page_text: str) -> dict:
       verdict      — строка-вердикт
       metadata     — словарь извлечённых метаданных
     """
-    if not page_text.strip():
-        return {"score": 0.0, "found": [], "missing": [], "verdict": "⚠️ Текст не извлечён (вероятно, скан)", "metadata": {}}
+    is_xml = filename.lower().endswith(".xml")
+    if is_xml:
+        token_text = extract_text_content_from_xml(page_text.encode("utf-8")) or page_text
+    else:
+        token_text = page_text
 
+    page_tokens = tokens_from_page(token_text)
+    page_lower  = normalize(token_text)
     file_tokens = tokens_from_filename(filename)
-    page_tokens = tokens_from_page(page_text)
-    page_lower  = normalize(page_text)  # Полный нормализованный текст для поиска фраз
 
     # ── Структурные токены (раздел N, подраздел N, часть N) ──
     struct_tokens = extract_structural_tokens(filename)
@@ -265,10 +419,19 @@ def compare(filename: str, page_text: str) -> dict:
     found   = []
     missing = []
 
-    if not file_tokens and not struct_tokens:
+    # Добавляем шифр из эталона в список для поиска (для наглядности в отчете)
+    extra_tokens = []
+    if etalon and etalon.get("шифр"):
+        # Берем только значимую часть шифра (первые 2 части)
+        e_parts = [p for p in tokenize(etalon["шифр"]) if len(p) >= 3]
+        extra_tokens = e_parts
+
+    effective_tokens = list(dict.fromkeys(file_tokens + extra_tokens)) # unique preserving order
+
+    if not effective_tokens and not struct_tokens:
         return {"score": 1.0, "found": [], "missing": [], "verdict": "ℹ️ Токены не извлечены из имени файла", "metadata": {}}
 
-    for token in file_tokens:
+    for token in effective_tokens:
         # Прямое попадание
         if token in page_tokens:
             found.append(token)
@@ -306,14 +469,64 @@ def compare(filename: str, page_text: str) -> dict:
         verdict = f"❌ НЕ СОВПАДАЕТ ({int(score*100)}%) — возможна ошибка маркировки"
 
     # ── Извлечение метаданных объекта (Фикс 4) ──
-    metadata = extract_document_metadata(page_text)
+    if filename.lower().endswith(".xml"):
+        try:
+            metadata = extract_xml_metadata(page_text.encode("utf-8"))
+        except Exception:
+            metadata = extract_document_metadata(page_text)
+    else:
+        metadata = extract_document_metadata(page_text)
+
+    # ── Сверка с ЭТАЛОНОМ (Ground Truth) ──
+    etalon_errors = []
+    is_source = False
+    has_etalon = bool(etalon and etalon.get("шифр"))
+    no_xml_msg = "не проверенно , отсутствуют или не расознанно xml источник"
+
+    if etalon:
+        is_source = (filename == etalon.get("file") or 
+                     filename == etalon.get("pz_file") or 
+                     filename == etalon.get("znp_file"))
+        
+        if not is_source:
+             etalon_errors = compare_with_etalon(metadata, etalon)
+
+    # ── Формирование 3-циклового результата ──
+    cycle1_res = "✅ ЭТАЛОН" if is_source else ("⚓ УСТАНОВЛЕН" if has_etalon else f"❌ {no_xml_msg}")
+    
+    cycle2_res = "✅ Совпадает"
+    if not has_etalon and not is_source:
+        cycle2_res = "⚪ Не проверено"
+    elif etalon_errors:
+        if any("Шифр" in err for err in etalon_errors):
+            cycle2_res = "❌ Шифр не совпадает"
+        else:
+            cycle2_res = "⚠️ Различия в данных"
+
+    # Результирующий вердикт
+    if is_source:
+        verdict = "✅ ЭТАЛОН (Источник Истины)"
+    elif not has_etalon:
+        verdict = f"⚠️ {no_xml_msg}"
+        score = min(score, 0.5)
+    elif cycle2_res.startswith("❌"):
+        verdict = f"❌ ОШИБКА ИДЕНТИФИКАЦИИ ({cycle2_res})"
+        score = min(score, 0.3)
 
     return {
-        "score":    score,
-        "found":    all_found,
-        "missing":  all_missing,
-        "verdict":  verdict,
+        "cycle1": cycle1_res,
+        "cycle2": cycle2_res,
+        "cycle3": {
+            "score": score,
+            "found": all_found,
+            "missing": all_missing,
+        },
+        "score": score,
+        "found": all_found,
+        "missing": all_missing,
+        "verdict": verdict,
         "metadata": metadata,
+        "etalon_errors": etalon_errors,
     }
 
 
@@ -467,7 +680,7 @@ def _ocr_first_page(doc) -> tuple:
 
 # ──────────────────────── XML-парсер (Фикс 3) ────────────────────────
 
-def extract_xml_metadata(xml_path: Path) -> str:
+def extract_xml_descriptive_text(xml_path: Path) -> str:
     """Извлекает текстовое содержимое из XML для идентификации."""
     import xml.etree.ElementTree as ET
     
@@ -600,7 +813,10 @@ def extract_text_for_file(file_path: Path) -> tuple[str, str]:
     if ext == ".pdf":
         return extract_first_page_text(file_path), "PDF"
     elif ext == ".xml":
-        return extract_xml_metadata(file_path), "XML"
+        try:
+            return file_path.read_text(encoding="utf-8"), "XML"
+        except Exception:
+            return file_path.read_text(encoding="cp1251", errors="ignore"), "XML"
     elif ext == ".ifc":
         return extract_ifc_metadata(file_path), "IFC/BIM"
     else:
@@ -608,11 +824,17 @@ def extract_text_for_file(file_path: Path) -> tuple[str, str]:
 
 
 def main():
-    if len(sys.argv) < 2:
+    import argparse
+    parser = argparse.ArgumentParser(description="Сверка титульных листов проектной документации.")
+    parser.add_argument("path", nargs="?", help="Путь к папке или ZIP-архиву")
+    parser.add_argument("--etalon-json", help="Путь к JSON-файлу с готовым эталоном (для цикличной проверки)")
+    args = parser.parse_args()
+
+    if not args.path:
         print("Использование: python test_first_page.py <путь_к_папке_или_zip>")
         sys.exit(1)
 
-    target_path = Path(sys.argv[1])
+    target_path = Path(args.path)
     if not target_path.exists():
         print(f"Путь не найден: {target_path}")
         sys.exit(1)
@@ -644,22 +866,87 @@ def main():
         added = safe_unzip(target_path, search_dir)
         print(f"📦 Распаковано: {added} файлов")
 
-    # Собираем все поддерживаемые файлы: PDF + XML + IFC
-    all_files = (
-        sorted(search_dir.rglob("*.pdf")) +
-        sorted(search_dir.rglob("*.xml")) +
-        sorted(search_dir.rglob("*.ifc"))
-    )
+    # Собираем все поддерживаемые файлы
+    xml_files = sorted(search_dir.rglob("*.xml"))
+    pdf_files = sorted(search_dir.rglob("*.pdf"))
+    ifc_files = sorted(search_dir.rglob("*.ifc"))
+
+    # ── ФАЗА 1: Извлечение ЭТАЛОНА (Ground Truth) - Цикл 1 ──
+    etalon = None
+    no_xml_status = "не проверенно, отсутствуют или не распознано xml источник"
+    
+    # 1. Если передан готовый JSON
+    if args.etalon_json and Path(args.etalon_json).exists():
+        try:
+            with open(args.etalon_json, "r", encoding="utf-8") as f:
+                etalon = json.load(f)
+            print(f"⚓ Загружен ЭТАЛОН из внешнего источника: {args.etalon_json}")
+        except Exception as e:
+            print(f"⚠️ Ошибка загрузки эталона из JSON: {e}")
+
+    # 2. Иначе извлекаем из текущих XML
+    if not etalon:
+        etalon = extract_etalon_from_xml(xml_files, search_dir)
+        
+    has_etalon = bool(etalon and etalon.get("шифр"))
+
+    if has_etalon:
+        print(f"⚓ Цикл 1 ЗАВЕРШЕН (Источник: {etalon['file']})")
+        print(f"   Объект: {etalon['объект']}")
+        print(f"   Шифр:   {etalon['шифр']}")
+    else:
+        print(f"⚠️ Цикл 1: {no_xml_status}")
+
+    all_files = xml_files + pdf_files + ifc_files
     print(f"📄 Найдено файлов: {len(all_files)} (PDF + XML + IFC)")
 
     stats = {"ok": 0, "warn": 0, "fail": 0, "scan": 0}
+
+    # Заголовок отчёта (3-цикловая структура)
+    with open(report_file, "w", encoding="utf-8") as rf:
+        rf.write(f"# Отчет сверки титульных листов ({now_str})\n\n")
+        rf.write(f"**Источник:** `{target_path}`\n\n")
+        
+        if has_etalon:
+            rf.write("## ⚓ ЦИКЛ 1: ЭТАЛОННЫЕ ДАННЫЕ (Ground Truth)\n")
+            rf.write(f"- **Файл-источник:** `{etalon['file']}`\n")
+            rf.write(f"- **Объект:** `{etalon['объект']}`\n")
+            rf.write(f"- **Шифр:** `{etalon['шифр']}`\n")
+            rf.write(f"- **Стадия:** `{etalon['стадия']}`\n")
+            rf.write(f"- **Год:** `{etalon['год']}`\n")
+            
+            if etalon.get("pz_file") and etalon.get("znp_file"):
+                rf.write("\n### ⚖️ Сверка ПЗ vs ЗнП\n")
+                rf.write("| Реквизит | Значение из ПЗ | Значение из ЗнП | Результат |\n")
+                rf.write("| :--- | :--- | :--- | :--- |\n")
+                
+                def compare_vals(v1, v2, soft=False):
+                    v1, v2 = (v1 or "").strip(), (v2 or "").strip()
+                    if not v1 and not v2: return "⚪ Не найдено"
+                    if not v1 or not v2: return "🟡 Частично"
+                    if v1.lower() == v2.lower(): return "✅ Совпадает"
+                    if soft:
+                        w1, w2 = set(tokenize(v1)), set(tokenize(v2))
+                        if len(w1.intersection(w2)) >= 2: return "✅ Совпадает (мягко)"
+                    return "❌ Расхождение"
+
+                p, z = etalon.get("pz_meta",{}), etalon.get("znp_meta",{})
+                rf.write(f"| **Шифр объекта** | {p.get('шифр','-')} | {z.get('шифр','-')} | {compare_vals(p.get('шифр'), z.get('шифр'))} |\n")
+                rf.write(f"| **Наименование** | {p.get('объект','-')[:40]}... | {z.get('объект','-')[:40]}... | {compare_vals(p.get('объект'), z.get('объект'), True)} |\n")
+                rf.write(f"| **Стадия** | {p.get('стадия','-')} | {z.get('стадия','-')} | {compare_vals(p.get('стадия'), z.get('стадия'))} |\n")
+        else:
+            rf.write(f"## ❌ ЦИКЛ 1: ОШИБКА\n> **{no_xml_status}**\n\n")
+
+        rf.write("\n## 📋 ЦИКЛ 2 и 3: СВОДНЫЙ РЕЗУЛЬТАТ\n")
+        rf.write("| Файл | Тип | Вердикт (Цикл 2) | Найдено (Цикл 3) | Пропущено |\n")
+        rf.write("|------|-----|---------|---------|----------|\n")
 
     for i, file_path in enumerate(all_files, 1):
         rel = str(file_path.relative_to(search_dir))
         print(f"[{i}/{len(all_files)}] {rel}")
 
         page_text, type_label = extract_text_for_file(file_path)
-        result = compare(rel, page_text)
+        result = compare(rel, page_text, etalon=etalon)
 
         display_text = page_text[:1500] + ("..." if len(page_text) > 1500 else "")
         if not display_text.strip():
@@ -677,8 +964,9 @@ def main():
         short_name  = Path(rel).name[:60]
 
         with open(report_file, "a", encoding="utf-8") as rf:
-            rf.write(f"| `{short_name}` | {type_label} | {result['verdict']} | "
-                     f"{int(result['score']*100)}% | {found_str} | {missing_str} |\n")
+            # Цикл 2 (Мета) и Цикл 3 (Токены / %)
+            rf.write(f"| `{short_name}` | {type_label} | {result['cycle2']} | "
+                     f"{int(result['cycle3']['score']*100)}% | {found_str} | {missing_str} |\n")
 
     # Детальные блоки
     with open(report_file, "a", encoding="utf-8") as rf:
@@ -687,8 +975,15 @@ def main():
     for i, file_path in enumerate(all_files, 1):
         rel = str(file_path.relative_to(search_dir))
         page_text, type_label = extract_text_for_file(file_path)
-        result  = compare(rel, page_text)
-        display = page_text[:1500] + ("..." if len(page_text) > 1500 else "")
+        result  = compare(rel, page_text, etalon=etalon)
+        
+        # ── Для XML показываем чистый текст, а не сырые теги ──
+        if type_label == "XML":
+            display_source = extract_text_content_from_xml(page_text.encode("utf-8"))
+        else:
+            display_source = page_text
+
+        display = display_source[:1500] + ("..." if len(display_source) > 1500 else "")
 
         with open(report_file, "a", encoding="utf-8") as rf:
             rf.write(f"\n### {i}. `{rel}` [{type_label}]\n\n")
@@ -698,12 +993,20 @@ def main():
             if result["found"]:
                 rf.write(f"**✅ Токены найдены:** `{', '.join(result['found'])}`\n\n")
 
+            # Ошибки сверки с эталоном
+            if result.get("etalon_errors"):
+                rf.write("**❌ Расхождения с ЭТАЛОНОМ:**\n")
+                for err in result["etalon_errors"]:
+                    rf.write(f"- {err}\n")
+                rf.write("\n")
+
             # Метаданные объекта
             meta = result.get("metadata", {})
-            if meta:
+            if any(meta.values()):
                 rf.write("**📋 Метаданные:**\n")
                 for key, val in meta.items():
-                    rf.write(f"- {key}: {val}\n")
+                    if val:
+                        rf.write(f"- {key}: {val}\n")
                 rf.write("\n")
 
             rf.write(f"**Текст/содержимое:**\n")
@@ -722,7 +1025,7 @@ def main():
         rf.write(f"- ❌ Не совпадают: **{stats['fail']}**\n")
         rf.write(f"- 🖼 Сканы/пустые: **{stats['scan']}**\n")
 
-    if temp_dir_obj:
+    if temp_dir_obj is not None:
         temp_dir_obj.cleanup()
 
     print(f"\n✅ Готово! Отчет: {report_file}")

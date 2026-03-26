@@ -453,3 +453,4 @@ yfinance==1.1.0
 zipp==3.23.0
 zope.interface==5.4.0
 zstandard==0.23.0
+ifcopenshell==0.7.0.231218

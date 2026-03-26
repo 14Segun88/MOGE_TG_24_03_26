@@ -781,7 +781,7 @@ async def _cmd_local_zip(ws: WebSocket, session_id: str, zip_path: str):
                         file_data = f.read()
                     os.remove(safe_extracted_path)
 
-                    user_sessions[session_id][fname] = file_data
+                    user_sessions[session_id].setdefault("files", {})[fname] = file_data
                     added_count += 1
                     total_size += len(file_data)
         finally:
@@ -807,7 +807,7 @@ async def _cmd_local_zip(ws: WebSocket, session_id: str, zip_path: str):
 
 async def _cmd_run(ws: WebSocket, session_id: str):
     """Запуск анализа из корзины."""
-    files = user_sessions.get(session_id, {})
+    files = user_sessions.get(session_id, {}).get("files", {})
     if not files:
         await ws.send_text("⚠️ Корзина пуста! Сначала загрузите файлы через /local_zip")
         return
@@ -820,7 +820,7 @@ async def _run_analysis(ws: WebSocket, session_id: str, package_name: str):
     """Единый метод запуска пайплайна (аналог _run_analysis_and_report из bot.py)."""
     global debug_enabled
 
-    files = user_sessions.get(session_id, {})
+    files = user_sessions.get(session_id, {}).get("files", {})
     if not files:
         await ws.send_text("⚠️ Нет файлов для анализа.")
         return
@@ -832,8 +832,8 @@ async def _run_analysis(ws: WebSocket, session_id: str, package_name: str):
             zf.writestr(fname, fdata)
     zip_bytes = zip_buf.getvalue()
 
-    # Очищаем корзину
-    user_sessions.pop(session_id, None)
+    # Очищаем только корзину, сохраняя сессию (например, для эталона)
+    user_sessions[session_id]["files"] = {}
 
     from src.api.pipeline import _run_pipeline
     start = datetime.now()
@@ -935,26 +935,18 @@ async def _run_title_page_check(ws: WebSocket, zip_bytes: bytes):
                 latest = reports[0]
                 report_text = latest.read_text(encoding="utf-8")
 
-                # Отправляем краткую сводку (таблицу)
+                # Отправляем краткую сводку (все таблицы и заголовки)
                 lines = report_text.split("\n")
                 header_and_table = []
-                in_table = False
                 for line in lines:
-                    if line.startswith("# "):
+                    # Захватываем все заголовки, таблицы и важные статусы
+                    if line.startswith("#") or line.startswith("|") or line.startswith("- ") or line.startswith("> **"):
                         header_and_table.append(line)
-                    elif line.startswith("| "):
-                        in_table = True
-                        header_and_table.append(line)
-                    elif line.startswith("## Итого"):
-                        header_and_table.append("")
-                        in_table = False
-                    elif in_table and not line.startswith("|"):
-                        in_table = False
-                    # Собираем итог
-                    if line.startswith("- "):
-                        header_and_table.append(line)
+                    elif line.strip() == "" and header_and_table and not header_and_table[-1].strip() == "":
+                         header_and_table.append("") # Сохраняем пустые строки для читаемости
 
-                await ws.send_text("\n".join(header_and_table))
+                combined_report = "\n".join(header_and_table)
+                await ws.send_text(combined_report)
                 await ws.send_text(f"📝 Полный отчёт сохранён: ResyltatTesta/{latest.name}")
 
     finally:
@@ -1072,7 +1064,7 @@ async def upload_files(
                         continue
 
                     file_data = zf.read(zinfo)
-                    user_sessions[session_id][fname] = file_data
+                    user_sessions[session_id].setdefault("files", {})[fname] = file_data
                     added_count += 1
                     total_size += len(file_data)
 
@@ -1098,10 +1090,11 @@ async def upload_files(
 
     else:
         # Отдельные файлы → в корзину
+        user_sessions[session_id].setdefault("files", {})
         for fname, fdata in uploaded.items():
-            user_sessions[session_id][fname] = fdata
+            user_sessions[session_id]["files"][fname] = fdata
 
-        basket = user_sessions.get(session_id, {})
+        basket = user_sessions[session_id].get("files", {})
         file_list = "\n".join(
             f"  {i+1}. {name} ({len(data) // 1024} КБ)"
             for i, (name, data) in enumerate(basket.items())
