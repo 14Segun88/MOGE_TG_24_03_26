@@ -1,8 +1,73 @@
-# 🏗 МособлГосЭкспертиза — DocumentAnalyzer v2.0
+# МособлГосЭкспертиза — AI Document Expertise System
 
-Автоматизированная система приёмки и проверки проектной документации (ПД) для государственной строительной экспертизы.
+> **Problem:** Ручная экспертиза проектной документации в госорганах занимает 12–42 дня на один объект. Эксперт проверяет 12 разделов ПД вручную, сверяя с десятками нормативных документов (ПП РФ №963, №154, XSD-схемы).
+>
+> **Solution:** Мульти-агентная система из 8 AI-агентов с оркестратором на Llama-3.3-70B, RAG-пайплайном на Weaviate (гибридный BM25 + vector search) и автоматической валидацией по XSD-схемам.
+>
+> **Outcome:** Время экспертизы одного комплекта ПД сокращено с 12–42 дней до 5–10 минут. Обработано 100+ реальных комплектов документации в production для МосОблГосЭкспертизы (2024–2026).
 
-**Telegram-бот** принимает ZIP-архивы с проектной документацией, проводит формальные и содержательные проверки на соответствие ПП РФ №963, №154 и другим нормативам, и генерирует готовое заключение эксперта.
+### Key Metrics
+| Metric | Value |
+|---|---|
+| Время экспертизы (до) | 12–42 дня |
+| Время экспертизы (после) | 5–10 минут |
+| Разделов ПД за прогон | 12 |
+| Формальных проверок (FC) | 5 (FC-001..FC-005) |
+| Комплектов в production | 100+ |
+| Нормативных документов в RAG | 20+ |
+| Агентов в системе | 8 |
+| LLM | Llama-3.3-70B (Groq Cloud) |
+
+### Architecture
+
+```mermaid
+flowchart TD
+    A[📁 ZIP-архив через Telegram] --> B[🤖 Orchestrator]
+    B -->|динамическая маршрутизация| C[FileClassifier]
+    B -->|динамическая маршрутизация| D[XmlParser]
+    B -->|динамическая маршрутизация| E[FormalCheckRunner<br/>FC-001..FC-005]
+    B -->|динамическая маршрутизация| F[PP963Agent<br/>кросс-валидация ТЭП]
+    B -->|динамическая маршрутизация| G[SverkaChecker<br/>сверка ТЗ/ПЗ]
+    B -->|динамическая маршрутизация| H[EstimateChecker<br/>сметы]
+    B -->|динамическая маршрутизация| I[NoprizAgent<br/>реестр НОПРИЗ via Playwright]
+    B -->|динамическая маршрутизация| J[KnowledgeBase<br/>RAG → Weaviate]
+    
+    C --> K[📊 ReportAgent]
+    D --> K
+    E --> K
+    F --> K
+    G --> K
+    H --> K
+    I --> K
+    J --> K
+    
+    K --> L[📄 PDF-заключение по ГОСТ]
+    L --> M[📱 Telegram]
+    
+    subgraph LLM Layer
+        N[Groq Cloud<br/>Llama-3.3-70B]
+    end
+    
+    subgraph Vector DB
+        O[Weaviate<br/>BM25 + Vector<br/>20+ нормативных документов]
+    end
+    
+    B -.-> N
+    F -.-> N
+    G -.-> N
+    J -.-> O
+```
+
+### Tech Stack
+![Python](https://img.shields.io/badge/Python-3.10+-blue?style=flat&logo=python)
+![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=flat&logo=fastapi)
+![Groq](https://img.shields.io/badge/Groq-Cloud-orange?style=flat)
+![Weaviate](https://img.shields.io/badge/Weaviate-Vector_DB-green?style=flat)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker)
+![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=flat&logo=playwright)
+
+### Demo
+🎬 [Видео-демо работы системы](#)
 
 ---
 
@@ -165,27 +230,6 @@ nano .env   # BOT_TOKEN, GROQ_API_KEY, ADMIN_TELEGRAM_ID
 | `__pycache__/` | Кэш Python |
 | `_parsed_docs.txt` | Парсинг документов (~1.5 МБ) |
 | `*:Zone.Identifier` | Системные файлы Windows |
-
----
-
-## ⚙️ Архитектура
-
-```
-ZIP-архив → Telegram Bot → Orchestrator
-                              ├─→ FileClassifier (разбор архива)
-                              ├─→ XmlParser (ТЭП из XML)
-                              ├─→ FormalCheckRunner (FC-001..FC-007)
-                              ├─→ PP963Agent (кросс-валидация ТЭП)
-                              ├─→ SverkaChecker (сверка ТЗ/ПЗ)
-                              ├─→ EstimateChecker (сметы)
-                              ├─→ NoprizAgent (реестр НОПРИЗ)
-                              ├─→ KnowledgeBase (RAG → Weaviate)
-                              └─→ ReportAgent → PDF-заключение → Telegram
-```
-
-**LLM:** Llama-3.3-70b-versatile (Groq Cloud)
-**Векторная БД:** Weaviate (Docker, гибридный BM25+Vector)
-**Эмбеддинги:** nomic-embed-text (LM Studio, локально)
 
 ---
 
