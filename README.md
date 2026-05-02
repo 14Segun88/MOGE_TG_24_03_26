@@ -109,7 +109,7 @@ nano .env   # BOT_TOKEN, GROQ_API_KEY, ADMIN_TELEGRAM_ID
 | `docker-compose.yml` | Docker-контейнер Weaviate (векторная БД) |
 | `.env.example` | Шаблон конфигурации (ключи, порты) |
 | `requirements.txt` | Python-зависимости |
-| `MEMORY.md` | Память проекта (баги, решения, контекст) |
+
 
 ### Агенты (src/agents/)
 
@@ -174,12 +174,12 @@ nano .env   # BOT_TOKEN, GROQ_API_KEY, ADMIN_TELEGRAM_ID
 | `xml_comparator/mapping_PZ_ZnP.json` | Маппинг полей ПЗ → замечания эксперта |
 | `xml_comparator/Dockerfile` | Docker-образ микросервиса |
 
-### Тестирование
+### Тестирование (tests/)
 
 | Файл | Назначение |
 |------|-----------|
-| `test_first_page.py` | Сверка титульных листов PDF (детерминированный алгоритм) |
-| `test_monitor.sh` | 4-шаговый тестовый стенд (raw → expert → fixed → final) |
+| `tests/test_first_page.py` | Сверка титульных листов PDF (детерминированный алгоритм) |
+| `tests/test_monitor.sh` | 4-шаговый тестовый стенд (raw → expert → fixed → final) |
 | `tests/test_api.py` | Unit-тесты API |
 | `tests/test_document_analyzer.py` | Тесты классификатора документов |
 | `tests/test_e2e_pipeline.py` | E2E-тесты пайплайна |
@@ -204,15 +204,14 @@ nano .env   # BOT_TOKEN, GROQ_API_KEY, ADMIN_TELEGRAM_ID
 | `_generate_drawio.py` | Генерация блок-схем (Draw.io) |
 | `mark_drawio.py` | Разметка блок-схем статусами ✅/🟡/❌ |
 
-### Документация (в корне)
+### Документация (docs/)
 
 | Файл | Назначение |
 |------|-----------|
-| `plan_proposal.md` / `plan_proposal2.md` / `plan_proposal3.md` | Архитектурные предложения |
-| `Структура работы приемки.drawio` | Блок-схема процесса приемки |
-| `Пайплайн работы с замечаниями.drawio` | Блок-схема работы с замечаниями |
-| `Чек-листы (2) (1).pdf` | Чек-листы экспертизы |
-| `АВТОМАТИЗИРОВАННАЯ СИСТЕМА ЭКСПЕРТИЗЫ ДОКУМЕНТАЦИИ.docx` | ТЗ на систему |
+| `docs/Структура работы приемки.drawio` | Блок-схема процесса приемки |
+| `docs/Пайплайн работы с замечаниями.drawio` | Блок-схема работы с замечаниями |
+| `docs/Чек-листы (2) (1).pdf` | Чек-листы экспертизы |
+| `docs/АВТОМАТИЗИРОВАННАЯ СИСТЕМА ЭКСПЕРТИЗЫ ДОКУМЕНТАЦИИ.docx` | ТЗ на систему |
 
 ---
 
