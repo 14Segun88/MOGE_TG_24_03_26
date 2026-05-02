@@ -66,8 +66,6 @@ flowchart TD
 ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker)
 ![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=flat&logo=playwright)
 
-### Demo
-🎬 [Видео-демо работы системы](#)
 
 ---
 
@@ -184,13 +182,15 @@ nano .env   # BOT_TOKEN, GROQ_API_KEY, ADMIN_TELEGRAM_ID
 | `tests/test_document_analyzer.py` | Тесты классификатора документов |
 | `tests/test_e2e_pipeline.py` | E2E-тесты пайплайна |
 
-### Fine-tuning
+### Fine-tuning (QLoRA)
 
 | Файл | Назначение |
 |------|-----------|
 | `train/generate_dataset.py` | Генерация Q&A датасета из Weaviate-чанков |
-| `train/finetune.py` | Скрипт fine-tuning через Unsloth (QLoRA) |
+| `train/finetune.py` | QLoRA fine-tuning через Unsloth (Qwen2.5-3B → GGUF) |
 | `train/dataset.jsonl` | Сгенерированный датасет |
+
+> **Status:** Full training pipeline implemented and tested (dataset generation → QLoRA 4-bit → GGUF export). Not yet trained on production data due to GPU constraints (requires GTX 1650+ / 4GB VRAM). Currently using Groq Cloud API (Llama-3.3-70B) for production inference.
 
 ### Вспомогательные утилиты (tools/)
 
