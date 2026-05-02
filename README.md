@@ -75,8 +75,8 @@ flowchart TD
 
 ```bash
 # 1. Клонировать
-git clone git@github.com:14Segun88/MOGE_TG_24_03_26.git
-cd MOGE_TG_24_03_26
+git clone git@github.com:14Segun88/moge-document-expertise-ai.git
+cd moge-document-expertise-ai
 
 # 2. Установить (создаст venv, установит зависимости, поднимет Weaviate)
 chmod +x install.sh && ./install.sh
@@ -192,17 +192,17 @@ nano .env   # BOT_TOKEN, GROQ_API_KEY, ADMIN_TELEGRAM_ID
 | `train/finetune.py` | Скрипт fine-tuning через Unsloth (QLoRA) |
 | `train/dataset.jsonl` | Сгенерированный датасет |
 
-### Вспомогательные утилиты
+### Вспомогательные утилиты (tools/)
 
 | Файл | Назначение |
 |------|-----------|
 | `tools/compare_with_expert.py` | Сравнение бот-отчёта с заключением эксперта |
 | `tools/parse_conclusion.py` | Парсинг экспертного PDF-заключения |
-| `split_zip.py` | Разрезание ZIP по частям |
-| `read_docx.py` | Извлечение текста из DOCX |
-| `nopriz_login.py` | Авторизация в НОПРИЗ (Playwright) |
-| `_generate_drawio.py` | Генерация блок-схем (Draw.io) |
-| `mark_drawio.py` | Разметка блок-схем статусами ✅/🟡/❌ |
+| `tools/split_zip.py` | Разрезание ZIP по частям |
+| `tools/read_docx.py` | Извлечение текста из DOCX |
+| `tools/nopriz_login.py` | Авторизация в НОПРИЗ (Playwright) |
+| `tools/_generate_drawio.py` | Генерация блок-схем (Draw.io) |
+| `tools/mark_drawio.py` | Разметка блок-схем статусами ✅/🟡/❌ |
 
 ### Документация (docs/)
 
