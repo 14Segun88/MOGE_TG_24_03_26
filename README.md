@@ -67,6 +67,9 @@ flowchart TD
 ![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=flat&logo=playwright)
 
 
+### 📋 Описание проекта
+📄 [Подробное описание проекта (PDF)](https://drive.google.com/file/d/1qvp4fEAjbX9im9-FAn11C73hj489kOIL/view?usp=sharing)
+
 ---
 
 ## 🚀 Быстрый старт
